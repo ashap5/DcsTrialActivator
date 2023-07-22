@@ -39,4 +39,4 @@ Note: Profiles are saved locally in your browser's local storage, so they will b
 
 Contact: Discord - pasha5.
 
-# //TODO add all Trial accesable airplanes Terrains ; implement creating new profiles via GUI ; Fix some of the names
+# //TODO add all Trial accessible airplanes Terrains ; implement creating new profiles via GUI ; Fix some of the names
