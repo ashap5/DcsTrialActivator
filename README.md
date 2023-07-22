@@ -1,6 +1,6 @@
-# Auto-Trial Clicker with Profile and Saving
+# DcsTrialActivator
 ![preview](Thumbnail.png)
-The Auto-Trial Clicker is a Tampermonkey UserScript designed to activate Trials on multiple modules selected by the user automatically on the Digital Combat Simulator (DCS) website. This script provides the convenience of automatically triggering trial activations, making it easier to explore various DCS modules.
+The DcsTrialActivator is a Tampermonkey UserScript designed to activate Trials on multiple modules selected by the user automatically on the Digital Combat Simulator (DCS) website. This script provides the convenience of automatically triggering trial activations, making it easier to explore various DCS modules.
 
 # Installation:
 
@@ -31,7 +31,7 @@ Once the UserScript is installed, navigate to the [Digital Combat Simulator webs
         Click the "Start" button in the profile menu to automatically activate Trials for the selected modules.
 Profiles
 
-The Auto-Trial Clicker allows you to manage multiple profiles, each containing a list of modules you want to activate trials for. You can easily switch between different profiles to activate trials for different sets of modules.
+The DcsTrialActivator allows you to manage multiple profiles, each containing a list of modules you want to activate trials for. You can easily switch between different profiles to activate trials for different sets of modules.
 Default Profiles
 
 The UserScript comes with a few default profiles to get you started:
