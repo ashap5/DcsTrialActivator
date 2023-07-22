@@ -43,6 +43,8 @@ The UserScript comes with a few default profiles to get you started:
     
 Note: Profiles are saved locally in your browser's local storage, so they will be available across sessions. 
 
-Contact: Discord - pasha5.
+if you find any bugs/missing modules contact me via Discord : pasha5 or open an issue
 
-# //TODO add all Trial accessible airplanes Terrains ; implement creating new profiles via GUI ; Fix some of the names
+The code was made really fast so may be buggy
+
+# //TODO implement creating new profiles via GUI ; Fix some of the names
