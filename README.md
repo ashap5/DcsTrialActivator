@@ -14,7 +14,13 @@ Install the UserScript:
 ## [Click Here](https://github.com/ashap5/DcsAuto-Trial/raw/main/Auto-Trial%20Clicker%20with%20Profile%20Selection%20(LocalStorage).user.js)
 
 
+# --------------------------------------------------------
+# Important: While the script is opening tabs **dont swap to any other tabs** it will stop the opening of tabs
+# --------------------------------------------------------
+
 Verify Installation:
+
+
 
 Once the UserScript is installed, navigate to the [Digital Combat Simulator website](https://www.digitalcombatsimulator.com). You should see an "Auto-Trial" button at the top-left corner of the page.
 
