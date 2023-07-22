@@ -1,5 +1,5 @@
 # Auto-Trial Clicker with Profile and Saving
-![alt text](Thumbnail.png)
+![preview](Thumbnail.png)
 The Auto-Trial Clicker is a Tampermonkey UserScript designed to activate Trials on multiple modules selected by the user automatically on the Digital Combat Simulator (DCS) website. This script provides the convenience of automatically triggering trial activations, making it easier to explore various DCS modules.
 
 # Installation:
@@ -39,3 +39,4 @@ Note: Profiles are saved locally in your browser's local storage, so they will b
 
 Contact: Discord - pasha5.
 
+# //TODO add all Trial accesable airplanes Terrains ; implement creating new profiles via GUI ; Fix some of the names
