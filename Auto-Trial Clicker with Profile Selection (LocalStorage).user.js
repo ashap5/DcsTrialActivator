@@ -39,7 +39,7 @@
         newTab.onload = () => {
             newTab.postMessage('clickTrialButton', '*');
         };
-        await delay(2000); // Wait for 2 seconds for the page to load (adjust the delay if needed)
+        await delay(300); // Wait for 2 seconds for the page to load (adjust the delay if needed)
     }
 
     // Function to introduce a delay
@@ -94,6 +94,10 @@
         'https://www.digitalcombatsimulator.com/en/shop/terrains/the_channel_terrain/',
         'https://www.digitalcombatsimulator.com/en/shop/terrains/syria_terrain/',
         'https://www.digitalcombatsimulator.com/en/shop/terrains/normandy_2.0_terrain/',
+        'https://www.digitalcombatsimulator.com/en/shop/modules/av8bna/',
+        'https://www.digitalcombatsimulator.com/en/shop/modules/black_shark_3/',
+        'https://www.digitalcombatsimulator.com/en/shop/terrains/persiangulf_terrain/',
+        'https://www.digitalcombatsimulator.com/en/shop/terrains/nttr_terrain/',
     ];
 
     // Function to save profiles to local storage
@@ -126,6 +130,9 @@
                 'https://www.digitalcombatsimulator.com/en/shop/modules/tomcat/',
                 'https://www.digitalcombatsimulator.com/en/shop/modules/supercarrier/',
                 'https://www.digitalcombatsimulator.com/en/shop/modules/dcs_combined_arms/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/av8bna/',
+                'https://www.digitalcombatsimulator.com/en/shop/terrains/persiangulf_terrain/',
+                'https://www.digitalcombatsimulator.com/en/shop/terrains/nttr_terrain/',
             ],
             Profile2: [
                 'https://www.digitalcombatsimulator.com/en/shop/modules/viper/',
@@ -134,6 +141,57 @@
             Profile3: [
                 'https://www.digitalcombatsimulator.com/en/shop/modules/supercarrier/',
                 'https://www.digitalcombatsimulator.com/en/shop/modules/ah-64d/',
+            ],
+            Debug: [
+                'https://www.digitalcombatsimulator.com/en/shop/modules/hornet/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/dcs_flaming_cliffs_3/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/viper/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/tomcat/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/supercarrier/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/ah-64d/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/dcs_p51d_mustang/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/mb-339/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/mosquito/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/hind/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/tank_killer/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/thunderbolt/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/thunder/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/anton/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/i-16/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/farmer/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/christen_eagle/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/mig-29_dcs_world/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/yak52/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/av8bna/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/wwii_assets_pack/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/viggen/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/spitfire/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/tiger/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/gazelle/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/m2000c/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/albatros/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/aviojet/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/mig15bis/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/mig21bis/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/kurfurst/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/sabre/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/dora/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/dcs_mi8mtv2_magnificent_eight/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/dcs_uh1h_huey/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/dcs_combined_arms/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/dcs_black_shark_2/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/su-33_dcs_world/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/su-27_dcs_world/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/f-15c_dcs_world/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/su-25_dcs_world/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/a-10a_dcs_world/',
+                'https://www.digitalcombatsimulator.com/en/shop/terrains/the_channel_terrain/',
+                'https://www.digitalcombatsimulator.com/en/shop/terrains/syria_terrain/',
+                'https://www.digitalcombatsimulator.com/en/shop/terrains/normandy_2.0_terrain/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/av8bna/',
+                'https://www.digitalcombatsimulator.com/en/shop/modules/black_shark_3/',
+                'https://www.digitalcombatsimulator.com/en/shop/terrains/persiangulf_terrain/',
+                'https://www.digitalcombatsimulator.com/en/shop/terrains/nttr_terrain/',
             ],
         };
 
@@ -258,11 +316,29 @@
                 return profileURL.substring(prefix.length)
                 .replaceAll('/', '')
                 .replaceAll('modules', '')
+                .replaceAll('nttr_terrain','Nevada Test and Training')
                 .replaceAll('terrains','')
                 .replaceAll('terrain','')
                 .replaceAll('_dcs_world','')
                 .replaceAll('dcs_','')
                 .replaceAll('magnificent_eight','')
+                .replaceAll('hornet','F/A-18 Hornet')
+                .replaceAll('viper','F-16 Fighting Falcon')
+                .replaceAll('tomcat','F-14 Tomcat')
+                .replaceAll('hind','Mi-24 Hind')
+                .replaceAll('tank_killer','A-10C II Tank Killer')
+                .replaceAll('thunderbolt','P-47D Thunderbolt')
+                .replaceAll('thunder','JF-17 Thunder')
+                .replaceAll('anton','Fw 190 A-8')
+                .replaceAll('farmer','MiG-19P Farmer')
+                .replaceAll('viggen','AJS-37 Viggen')
+                .replaceAll('tiger','F-5E Tiger')
+                .replaceAll('gazelle','SA342 Gazelle')
+                .replaceAll('albatros','L-39 Albatros')
+                .replaceAll('aviojet','C-101 Aviojet')
+                .replaceAll('kurfurst','Bf 109 Kurfurst')
+                .replaceAll('sabre','F-86F Sabre')
+                .replaceAll('dora','Fw 190 D-9 Dora')
             }
             return profileURL;
         }
