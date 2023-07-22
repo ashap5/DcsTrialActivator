@@ -16,7 +16,7 @@ Install the UserScript:
 
 Verify Installation:
 
-Once the UserScript is installed, navigate to the Digital Combat Simulator website. You should see an "Auto-Trial" button at the top-left corner of the page.
+Once the UserScript is installed, navigate to the [Digital Combat Simulator website](https://www.digitalcombatsimulator.com). You should see an "Auto-Trial" button at the top-left corner of the page.
 
     Usage:
         Click the "Auto-Trial" button to open the profile menu.
