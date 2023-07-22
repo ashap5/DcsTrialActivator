@@ -8,7 +8,7 @@ The Auto-Trial Clicker is a Tampermonkey UserScript designed to activate Trials 
 
  For Mozilla Firefox, get [Tampermonkey](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/) from the Firefox Add-ons page.
 
- or any other userscript manager
+ or any other userscript manager will probably work too
  
 Install the UserScript: 
 ## [Click Here](https://github.com/ashap5/DcsAuto-Trial/raw/main/Auto-Trial%20Clicker%20with%20Profile%20Selection%20(LocalStorage).user.js)
@@ -39,6 +39,7 @@ The UserScript comes with a few default profiles to get you started:
     Profile1 - Contains a list of popular modules, including Hornet, Flaming Cliffs 3, Viper, Tomcat, Supercarrier, and DCS Combined Arms.
     Profile2 - Includes Viper and Tomcat modules for users interested in modern fighter aircraft.
     Profile3 - Includes Supercarrier and AH-64D modules for users interested in naval aviation and attack helicopters.
+    Profile4 - All modules(may lag the browser)
 
     
 Note: Profiles are saved locally in your browser's local storage, so they will be available across sessions. 
