@@ -13,7 +13,6 @@ The Auto-Trial Clicker is a Tampermonkey UserScript designed to activate Trials 
 Install the UserScript: 
 ## [Click Here](https://github.com/ashap5/DcsAuto-Trial/raw/main/Auto-Trial%20Clicker%20with%20Profile%20Selection%20(LocalStorage).user.js)
 
---Note: only tested on Mozilla Firefox but should work everywhere
 
 Verify Installation:
 
