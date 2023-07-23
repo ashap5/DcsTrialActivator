@@ -1,6 +1,6 @@
-# Auto-Trial Clicker with Profile and Saving
+# DcsTrialActivator
 ![preview](Thumbnail.png)
-The Auto-Trial Clicker is a Tampermonkey UserScript designed to activate Trials on multiple modules selected by the user automatically on the Digital Combat Simulator (DCS) website. This script provides the convenience of automatically triggering trial activations, making it easier to explore various DCS modules.
+The DcsTrialActivator is a Tampermonkey UserScript designed to activate Trials on multiple modules selected by the user automatically on the Digital Combat Simulator (DCS) website. This script provides the convenience of automatically triggering trial activations, making it easier to explore various DCS modules.
 
 # Installation:
 
@@ -8,13 +8,19 @@ The Auto-Trial Clicker is a Tampermonkey UserScript designed to activate Trials 
 
  For Mozilla Firefox, get [Tampermonkey](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/) from the Firefox Add-ons page.
 
- or any other userscript manager
+ or any other userscript manager will probably work too
  
 Install the UserScript: 
 ## [Click Here](https://github.com/ashap5/DcsAuto-Trial/raw/main/Auto-Trial%20Clicker%20with%20Profile%20Selection%20(LocalStorage).user.js)
 
 
+# --------------------------------------------------------
+# Important: While the script is opening tabs **dont swap to any other tabs** it will stop the opening of tabs
+# --------------------------------------------------------
+
 Verify Installation:
+
+
 
 Once the UserScript is installed, navigate to the [Digital Combat Simulator website](https://www.digitalcombatsimulator.com). You should see an "Auto-Trial" button at the top-left corner of the page.
 
@@ -25,7 +31,7 @@ Once the UserScript is installed, navigate to the [Digital Combat Simulator webs
         Click the "Start" button in the profile menu to automatically activate Trials for the selected modules.
 Profiles
 
-The Auto-Trial Clicker allows you to manage multiple profiles, each containing a list of modules you want to activate trials for. You can easily switch between different profiles to activate trials for different sets of modules.
+The DcsTrialActivator allows you to manage multiple profiles, each containing a list of modules you want to activate trials for. You can easily switch between different profiles to activate trials for different sets of modules.
 Default Profiles
 
 The UserScript comes with a few default profiles to get you started:
@@ -33,10 +39,13 @@ The UserScript comes with a few default profiles to get you started:
     Profile1 - Contains a list of popular modules, including Hornet, Flaming Cliffs 3, Viper, Tomcat, Supercarrier, and DCS Combined Arms.
     Profile2 - Includes Viper and Tomcat modules for users interested in modern fighter aircraft.
     Profile3 - Includes Supercarrier and AH-64D modules for users interested in naval aviation and attack helicopters.
+    Profile4 - All modules(may lag the browser)
 
     
 Note: Profiles are saved locally in your browser's local storage, so they will be available across sessions. 
 
-Contact: Discord - pasha5.
+if you find any bugs/missing modules contact me via Discord : pasha5 or open an issue
 
-# //TODO add all Trial accessible airplanes Terrains ; implement creating new profiles via GUI ; Fix some of the names
+The code was made really fast so may be buggy
+
+# //TODO implement creating new profiles via GUI ; Fix some of the names
