@@ -248,7 +248,7 @@
                     const checkbox = document.createElement('input');
                     checkbox.type = 'checkbox';
                     checkbox.checked = selectedWebsites.includes(token); // Set the checked property based on the selected websites
-                    checkbox.style.pointerEvents = 'auto'; // Re-enable interactions with the checkbox
+                    checkbox.style.pointerEvents = 'none'; // Re-enable interactions with the checkbox
                     checkbox.style.flexShrink = '0'; // Prevent the checkbox from shrinking
                     checkbox.style.marginLeft = '20px'
 
