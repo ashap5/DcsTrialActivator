@@ -1,0 +1,19 @@
+// /domains output
+// {
+//     "@context": "\/contexts\/Domain",
+//     "@id": "\/domains",
+//     "@type": "hydra:Collection",
+//     "hydra:member": [
+//     {
+//         "@id": "\/domains\/65086ce2e176b7af84e92ea4",
+//         "@type": "Domain",
+//         "id": "65086ce2e176b7af84e92ea4",
+//         "domain": "diginey.com",
+//         "isActive": true,
+//         "isPrivate": false,
+//         "createdAt": "2023-09-18T00:00:00+00:00",
+//         "updatedAt": "2023-09-18T00:00:00+00:00"
+//     }
+// ],
+//     "hydra:totalItems": 1
+// }
