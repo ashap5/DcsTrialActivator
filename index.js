@@ -7,7 +7,6 @@
 // @match        https://www.digitalcombatsimulator.com/*
 // @grant        none
 // @run-at       document-start
-// @require      /home/pasha/WebstormProjects/DcsTrialActivator/index.js
 // ==/UserScript==
 (function() {
     'use strict';
@@ -194,11 +193,12 @@
             MakeNewAccountButton.style.marginTop = '5px';
 
             MakeNewAccountButton.addEventListener('click', () => {
-                MakeNewAccount().then(
-                    (r) => {
-                        console.log(r)
-                    }
-                )
+                // MakeNewAccount().then(
+                //     (r) => {
+                //         console.log(r)
+                //     }
+                // )
+                CreateLoginPasswordWindow()
             });
 
 
@@ -293,10 +293,160 @@
         function getProfileName(token) {
             return JSON.parse(decodeURIComponent(atob(token.split('.')[0]))).CODE
         }
-        async function MakeNewAccount()
+        async function MakeNewAccount(username, password)
         {
+            const waitFor = delay => new Promise(resolve => setTimeout(resolve, delay));
+
+            let {mailadress, token} = await GetEmailAdress();
+            while (await CheckEmailCount() < 1) {
+                console.log("Waiting for email");
+                await waitFor(3000);
+            }
+            console.log("Email received");
+            ConfirmAccount().then(r => {
+                console.log("result" + r);
+
+                //in gui this shows succes
+            });
+            async function GetEmailAdress() {
+                const GetAvailableDomains = await fetch("https://api.mail.tm/domains", {
+                    method: "GET",
+                    headers: {"Content-Type": "application/json"},
+                });
+
+                let mailadress = Math.random().toString(36).substring(7);
+                let domain = (await GetAvailableDomains.json())['hydra:member'][0]?.domain;
+
+                if (!domain) {
+                    console.log("No domains available");
+                    alert("no Domains available (tempmail api error)")
+                }
+
+                const CreateAccount = await fetch("https://api.mail.tm/accounts", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        "address": mailadress + "@" + domain,
+                        "password": "test",
+                    }),
+                    headers: {"Content-Type": "application/json"},
+                });
+                console.log(await CreateAccount.json());
+
+                const GetToken = await fetch("https://api.mail.tm/token", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        "address": mailadress + "@" + domain,
+                        "password": "test",
+                    }),
+                    headers: {"Content-Type": "application/json"},
+                });
 
 
+                let token = (await GetToken.json())['token'];
+                return {mailadress : mailadress + "@" + domain, token : token};
+            }
+
+            async function CreateAccount()
+            {
+                const url = 'https://www.digitalcombatsimulator.com/en/auth/?register=yes';
+
+                const headers = {
+                    'Host': 'www.digitalcombatsimulator.com',
+                    'Cookie': '_gcl_au=1.1.908428613.1696105221; _gid=GA1.2.1802591656.1696105222; _ym_uid=1696105222389662133; _ym_d=1696105222; BX_USER_ID=616410b48b17033705d714859d247b5d; _ga_0PEB8NMGB5=GS1.1.1696113494.2.0.1696113494.60.0.0; _ga=GA1.2.28649852.1696105222; PHPSESSID=1GlSSfAvafvQC7YQJWD3NJnimPLtHrIA; BITRIX_CONVERSION_CONTEXT_s1=%7B%22ID%22%3A3%2C%22EXPIRE%22%3A1696204740%2C%22UNIQUE%22%3A%5B%22conversion_visit_day%22%5D%7D',
+                    'Content-Length': '318',
+                    'Cache-Control': 'max-age=0',
+                    'Sec-Ch-Ua': '"Chromium";v="117", "Not;A=Brand";v="8"',
+                    'Sec-Ch-Ua-Mobile': '?0',
+                    'Sec-Ch-Ua-Platform': '"Linux"',
+                    'Upgrade-Insecure-Requests': '1',
+                    'Origin': 'https://www.digitalcombatsimulator.com',
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36',
+                    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+                    'Sec-Fetch-Site': 'same-origin',
+                    'Sec-Fetch-Mode': 'navigate',
+                    'Sec-Fetch-User': '?1',
+                    'Sec-Fetch-Dest': 'document',
+                    'Referer': 'https://www.digitalcombatsimulator.com/en/auth/?register=yes',
+                    'Accept-Encoding': 'gzip, deflate, br',
+                    'Accept-Language': 'en-US,en;q=0.9',
+                };
+
+                const formData = new FormData();
+                formData.append('AUTH_FORM', 'Y');
+                formData.append('TYPE', 'REGISTRATION');
+                formData.append('USER_NAME', 'mike');
+                formData.append('USER_LAST_NAME', 'morin');
+                formData.append('USER_EMAIL', mailadress);
+                formData.append('USER_LOGIN', username);
+                formData.append('USER_PASSWORD', password);
+                formData.append('USER_CONFIRM_PASSWORD', password);
+                formData.append('captcha_sid', '070c616980cb7c7c92060bc3342907a0'); // todo get the captcha and show it to the user
+                formData.append('captcha_word', 'BCK5T');
+                formData.append('UF_SUBSCRIBE_NEWSLETTER', '0');
+                formData.append('send_account_info', '');
+
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers,
+                    body: formData
+                });
+
+                console.log('Response:', response);
+            }
+
+            async function CheckEmailCount()
+            {
+                const GetEmails = await fetch("https://api.mail.tm/messages", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization" : 'Bearer ' + token,
+                    },
+                });
+                let emailjson = await GetEmails.json();
+                // null check because api sometimes returns null instead of json // todo look into why
+                if (emailjson === null) {
+                    return "0";
+                }
+                return emailjson['hydra:totalItems'];
+            }
+
+            async function ConfirmAccount() // todo try to get the message id without this additonial request
+            {
+                const GetEmails = await fetch("https://api.mail.tm/messages", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization" : 'Bearer ' + token,
+                    },
+                });
+                let messageid = (await GetEmails.json())['hydra:member'][0]['id'];
+                console.log(messageid);
+                const GetEmail = await fetch("https://api.mail.tm/messages/" + messageid, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization" : 'Bearer ' + token,
+                    },
+                });
+                let json = await GetEmail.json();
+
+                const linkMatch = json.text.match(/(https:\/\/www.digitalcombatsimulator.com\/en\/auth\/\?confirm_registration=yes&confirm_user_id=\d+&confirm_code=\w+)/);
+
+                if (linkMatch) {
+                    const url = linkMatch[1];
+                    console.log("Extracted URL:", url);
+                    const ConfirmAccount = await fetch(url, {
+                        method: "GET",
+                    });
+                    return (await ConfirmAccount.text()).includes("User registration has been confirmed successfully");
+
+                } else {
+                    console.log("No link found in the text.");
+                }
+
+            }
         }
 
         // Show/hide the profile menu when clicking the activate button

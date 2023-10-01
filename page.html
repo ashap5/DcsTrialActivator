@@ -1,0 +1,463 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>Register</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=0.7">
+        <link rel="icon" href="/images/favicon.ico">
+                                                		                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="/bitrix/js/ui/design-tokens/dist/ui.design-tokens.min.css?167752342322029" type="text/css"  rel="stylesheet" />
+<link href="/bitrix/js/ui/fonts/opensans/ui.font.opensans.min.css?16680629542320" type="text/css"  rel="stylesheet" />
+<link href="/bitrix/js/main/popup/dist/main.popup.bundle.min.css?168613151826598" type="text/css"  rel="stylesheet" />
+<link href="/bitrix/js/altasib.errorsend/css/window.css?1686139095910" type="text/css"  rel="stylesheet" />
+<link href="/bitrix/cache/css/s1/dcs/page_08a065b602cd85c3594c6e4af6046dc7/page_08a065b602cd85c3594c6e4af6046dc7_v1.css?1695069357788" type="text/css"  rel="stylesheet" />
+<link href="/bitrix/cache/css/s1/dcs/template_9dd0fe03682e7886705f267f54d98993/template_9dd0fe03682e7886705f267f54d98993_v1.css?1695069352145214" type="text/css"  data-template-style="true" rel="stylesheet" />
+<script type="text/javascript">if(!window.BX)window.BX={};if(!window.BX.message)window.BX.message=function(mess){if(typeof mess==='object'){for(let i in mess) {BX.message[i]=mess[i];} return true;}};</script>
+<script type="text/javascript">(window.BX||top.BX).message({'JS_CORE_LOADING':'Loading...','JS_CORE_WINDOW_CLOSE':'Close','JS_CORE_WINDOW_EXPAND':'Expand','JS_CORE_WINDOW_NARROW':'Restore','JS_CORE_WINDOW_SAVE':'Save','JS_CORE_WINDOW_CANCEL':'Cancel','JS_CORE_H':'h','JS_CORE_M':'m','JS_CORE_S':'s','JS_CORE_NO_DATA':'- No data -','JSADM_AI_HIDE_EXTRA':'Hide extra items','JSADM_AI_ALL_NOTIF':'All notifications','JSADM_AUTH_REQ':'Authentication is required!','JS_CORE_WINDOW_AUTH':'Log In','JS_CORE_IMAGE_FULL':'Full size','JS_CORE_WINDOW_CONTINUE':'Continue'});</script>
+
+<script type="text/javascript" src="/bitrix/js/main/core/core.min.js?1693475858220181"></script>
+
+<script>BX.setJSList(['/bitrix/js/main/core/core_ajax.js','/bitrix/js/main/core/core_promise.js','/bitrix/js/main/polyfill/promise/js/promise.js','/bitrix/js/main/loadext/loadext.js','/bitrix/js/main/loadext/extension.js','/bitrix/js/main/polyfill/promise/js/promise.js','/bitrix/js/main/polyfill/find/js/find.js','/bitrix/js/main/polyfill/includes/js/includes.js','/bitrix/js/main/polyfill/matches/js/matches.js','/bitrix/js/ui/polyfill/closest/js/closest.js','/bitrix/js/main/polyfill/fill/main.polyfill.fill.js','/bitrix/js/main/polyfill/find/js/find.js','/bitrix/js/main/polyfill/matches/js/matches.js','/bitrix/js/main/polyfill/core/dist/polyfill.bundle.js','/bitrix/js/main/core/core.js','/bitrix/js/main/polyfill/intersectionobserver/js/intersectionobserver.js','/bitrix/js/main/lazyload/dist/lazyload.bundle.js','/bitrix/js/main/polyfill/core/dist/polyfill.bundle.js','/bitrix/js/main/parambag/dist/parambag.bundle.js']);
+</script>
+<script type="text/javascript">(window.BX||top.BX).message({'pull_server_enabled':'Y','pull_config_timestamp':'1626118451','pull_guest_mode':'N','pull_guest_user_id':'0'});(window.BX||top.BX).message({'PULL_OLD_REVISION':'This page must be reloaded to ensure proper site functioning and to continue work.'});</script>
+<script type="text/javascript">(window.BX||top.BX).message({'LANGUAGE_ID':'en','FORMAT_DATE':'MM/DD/YYYY','FORMAT_DATETIME':'MM/DD/YYYY HH:MI:SS','COOKIE_PREFIX':'BITRIX_SM','SERVER_TZ_OFFSET':'0','UTF_MODE':'Y','SITE_ID':'s1','SITE_DIR':'/','USER_ID':'','SERVER_TIME':'1696192196','USER_TZ_OFFSET':'0','USER_TZ_AUTO':'Y','bitrix_sessid':'c8f28276823a12d11f518c0f12d1c550'});</script>
+
+
+<script type="text/javascript"  src="/bitrix/cache/js/s1/dcs/kernel_main/kernel_main_v1.js?1696023445204812"></script>
+<script type="text/javascript" src="/bitrix/js/ui/dexie/dist/dexie3.bundle.min.js?166806295988295"></script>
+<script type="text/javascript" src="/bitrix/js/main/core/core_ls.min.js?14338437987365"></script>
+<script type="text/javascript" src="/bitrix/js/main/core/core_frame_cache.min.js?169347585811210"></script>
+<script type="text/javascript" src="/bitrix/js/pull/protobuf/protobuf.min.js?159586336176433"></script>
+<script type="text/javascript" src="/bitrix/js/pull/protobuf/model.min.js?159586336114190"></script>
+<script type="text/javascript" src="/bitrix/js/rest/client/rest.client.min.js?16025798699240"></script>
+<script type="text/javascript" src="/bitrix/js/pull/client/pull.client.min.js?168613147148309"></script>
+<script type="text/javascript" src="/bitrix/js/main/popup/dist/main.popup.bundle.min.js?168613150665670"></script>
+<script type="text/javascript">BX.setJSList(['/bitrix/js/main/core/core_fx.js','/bitrix/js/main/session.js','/bitrix/js/main/core/core_tooltip.js','/bitrix/js/main/core/core_uf.js','/bitrix/js/main/pageobject/pageobject.js','/bitrix/js/main/core/core_window.js','/bitrix/js/main/date/main.date.js','/bitrix/js/main/core/core_date.js','/bitrix/js/main/utils.js','/bitrix/js/main/rating_like.js','/bitrix/js/main/core/core_dd.js','/bitrix/js/main/core/core_timer.js','/bitrix/js/main/dd.js','/bitrix/js/main/core/core_autosave.js','/local/templates/dcs/components/bitrix/system.auth.registration/.default/script.js','/js/jquery.min.js','/js/fancybox/jquery.fancybox.js','/js/jquery.confirm.min.js','/local/templates/dcs/bootstrap/js/bootstrap.min.js','/js/jquery.debounce.js','/local/templates/dcs/components/bitrix/sale.basket.basket.line/.default/script.js','/bitrix/components/bitrix/search.title/script.js']);</script>
+<script type="text/javascript">BX.setCSSList(['/local/templates/dcs/components/bitrix/system.auth.registration/.default/style.css','/local/templates/dcs/bootstrap/css/bootstrap.min.css','/js/fancybox/jquery.fancybox.css','/local/modules/eagle/js/css/steam.css','/local/templates/dcs/components/bitrix/system.auth.form/login/style.css','/local/templates/dcs/components/bitrix/search.title/.default/style.css','/local/templates/dcs/styles.css','/local/templates/dcs/template_styles.css']);</script>
+<script type="text/javascript">
+					(function () {
+						"use strict";
+
+						var counter = function ()
+						{
+							var cookie = (function (name) {
+								var parts = ("; " + document.cookie).split("; " + name + "=");
+								if (parts.length == 2) {
+									try {return JSON.parse(decodeURIComponent(parts.pop().split(";").shift()));}
+									catch (e) {}
+								}
+							})("BITRIX_CONVERSION_CONTEXT_s1");
+
+							if (cookie && cookie.EXPIRE >= BX.message("SERVER_TIME"))
+								return;
+
+							var request = new XMLHttpRequest();
+							request.open("POST", "/bitrix/tools/conversion/ajax_counter.php", true);
+							request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+							request.send(
+								"SITE_ID="+encodeURIComponent("s1")+
+								"&sessid="+encodeURIComponent(BX.bitrix_sessid())+
+								"&HTTP_REFERER="+encodeURIComponent(document.referrer)
+							);
+						};
+
+						if (window.frameRequestStart === true)
+							BX.addCustomEvent("onFrameDataReceived", counter);
+						else
+							BX.ready(counter);
+					})();
+				</script>
+<link rel="alternate" href="/en/auth/" hreflang="en" />
+<link rel="alternate" href="/ru/auth/" hreflang="ru" />
+<link rel="alternate" href="/de/auth/" hreflang="de" />
+<link rel="alternate" href="/cn/auth/" hreflang="cn" />
+<link rel="alternate" href="/fr/auth/" hreflang="fr" />
+<link rel="alternate" href="/it/auth/" hreflang="it" />
+<link rel="alternate" href="/es/auth/" hreflang="es" />
+<script type="text/javascript">
+            var ALXerrorSendMessages={
+                'head':'You found an error in the text',
+                'footer':'Send error message',
+                'comment':'Comment (optional)',
+                'TitleForm':'The error message',
+                'ButtonSend':'Send',
+                'LongText':'Error! You selected too much text.',
+                'LongText2':'Please try again.',
+                'cancel':'Cancel',
+                'senderror':'Error sending message!',
+                'close':'Close',
+                'text_ok':'Message sent.',
+                'text_ok2':'Thank you for your attention!'
+            }
+            </script>
+<script type='text/javascript' async src='/bitrix/js/altasib.errorsend/error.js'></script>
+
+
+
+<script type="text/javascript"  src="/bitrix/cache/js/s1/dcs/template_a7d064f763f4ec15a3f07228ba8d06dc/template_a7d064f763f4ec15a3f07228ba8d06dc_v1.js?1695069352173867"></script>
+<script type="text/javascript"  src="/bitrix/cache/js/s1/dcs/page_59647fa36bd742ce5f07c4bd69d2c392/page_59647fa36bd742ce5f07c4bd69d2c392_v1.js?16950693576701"></script>
+<script type="text/javascript">var _ba = _ba || []; _ba.push(["aid", "ec4e610cef9504dc3ad737bd0300464f"]); _ba.push(["host", "www.digitalcombatsimulator.com"]); (function() {var ba = document.createElement("script"); ba.type = "text/javascript"; ba.async = true;ba.src = (document.location.protocol == "https:" ? "https://" : "http://") + "bitrix.info/ba.js";var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(ba, s);})();</script>
+
+
+        <!--[if lt IE 9]>
+        <script src="/js/html5shiv.js"></script>
+        <script src="/js/respond.min.js"></script>
+        <![endif]-->
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $(".fancybox").fancybox({helpers:{overlay:{locked:false}}});
+                $(".confirm").confirm({
+                    post: true,
+                    confirmButtonClass: "btn btn-primary",
+                    cancelButtonClass: "btn btn-default"
+                });
+            });
+        </script>
+            </head>
+<body>
+    <div id="panel"></div>
+    <div class="navbar navbar-inverse" role="navigation" id="roof">
+        <div class="container">
+            <a href="/en" class="navbar-brand"><img src="/images/dcs-world-15-logo.svg?v3" alt="Digital Combat Simulator World"></a>
+            <div class="pull-right navbar-lang"><a href="/en/auth/"><img src="/local/templates/dcs/images/lang-en.png" alt="English"></a>
+<a href="/ru/auth/"><img src="/local/templates/dcs/images/lang-ru.png" alt="Russian"></a>
+<a href="/de/auth/"><img src="/local/templates/dcs/images/lang-de.png" alt="German"></a>
+<a href="/cn/auth/"><img src="/local/templates/dcs/images/lang-cn.png" alt="Chinese"></a>
+<a href="/fr/auth/"><img src="/local/templates/dcs/images/lang-fr.png" alt="French"></a>
+<a href="/it/auth/"><img src="/local/templates/dcs/images/lang-it.png" alt="Italian"></a>
+<a href="/es/auth/"><img src="/local/templates/dcs/images/lang-es.png" alt="Spanish"></a></div>
+            <div class="pull-right navbar-user">
+                <span id="login-line"> 
+<a href="javascript:void(0)" onclick="openAuthorizePopup()">Login</a>
+</span>
+<div id="bx_auth_popup_form" style="display:none;" class="bx_login_popup_form">
+<form class="form-horizontal bx_auth_form" name="system_auth_form" method="post" target="_top" action="/en/auth/">
+    <input type="hidden" name="AUTH_FORM" value="Y" />
+    <input type="hidden" name="TYPE" value="AUTH" />
+        <input type="hidden" name="backurl" value="/en/auth/" />
+            <div class="row">
+                <div class="form-group">
+            <label for="USER_LOGIN" class="col-xs-3 control-label">Login</label>
+            <div class="col-xs-8">
+                <input type="text" class="form-control" id="USER_LOGIN" name="USER_LOGIN" maxlength="255">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="USER_PASSWORD" class="col-xs-3 control-label">Password</label>
+            <div class="col-xs-8">
+                <input type="password" class="form-control" id="USER_PASSWORD" name="USER_PASSWORD" maxlength="255">
+            </div>
+            <div class="col-xs-1" id="lock-icon">
+                            </div>
+        </div>
+                             <div class="form-group"><div class="col-xs-7 col-xs-offset-3"><input type="checkbox" id="AUTH_USER_REMEMBER" name="USER_REMEMBER" value="Y" checked/>&nbsp;<label for="AUTH_USER_REMEMBER">Remember me</label></div></div>
+            </div>
+    <div class="row text-center">
+        <div class="col-xs-6"><input type="submit" name="Login" class="btn btn-primary" value="Authorize" /></div>
+        <div class="col-xs-6">
+              <a href="/en/auth/?forgot_password=yes" rel="nofollow">Forgot your password?</a>
+              <a href="/en/auth/?register=yes" rel="nofollow">Register</a>
+        </div>
+    </div>
+</form></div>
+<script>
+function openAuthorizePopup()
+{
+    var obPopupWin = BX.PopupWindowManager.create("AuthorizePopup", null, {
+        autoHide: true,
+        offsetLeft: 0,
+        offsetTop: 0,
+        overlay : true,
+        closeByEsc: true,
+        titleBar: false,
+		closeIcon: {},
+		content:'<div style="width:500px;height:250px; text-align: center;"><span style="position:absolute;left:50%; top:50%"><img src="/local/templates/dcs/components/bitrix/system.auth.form/.default/images/wait.gif"/></span></div>'
+	});
+    obPopupWin.popupContainer.className = 'popup-window-login';
+    obPopupWin.setContent(BX("bx_auth_popup_form"));
+    obPopupWin.show();
+    document.system_auth_form.USER_LOGIN.focus();
+}
+</script>
+                /
+                <script>
+    var obEshopBasket = new JSEshopBasket("/local/templates/dcs/components/bitrix/sale.basket.basket.line/.default/ajax.php", "s1", "en");
+</script>
+<span id="bx_cart_block">
+<!--'start_frame_cache_bx_cart_block'--><a href="/en/personal/cart/">Cart</a>: <span id="bx_cart_num">empty</span><!--'end_frame_cache_bx_cart_block'--></span>            </div>
+        </div>
+    </div>
+
+    <div class="navbar navbar-inverse" role="navigation" id="top-menu" >
+        <div class="container">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-menu-list" aria-expanded="false">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+</button>
+<ul class="collapse navbar-collapse nav navbar-nav navbar-left" id="top-menu-list">
+<li><a href="/en/index.php">Home</a></li>
+<li class="dropdown"><a href="/en/news/">News</a>
+<ul class="dropdown-menu" role="menu">
+<li class="dropdown"><a href="/en/news/changelog/">Changelog</a></li>
+<li class="dropdown"><a href="/en/news/newsletters/">Newsletters</a></li>
+</ul></li><li class="dropdown"><a href="/en/products/">Products</a>
+<ul class="dropdown-menu" role="menu">
+<li class="dropdown"><a href="/en/products/world/">DCS World</a></li>
+<li class="dropdown"><a href="/en/products/planes/">Planes</a></li>
+<li class="dropdown"><a href="/en/products/helicopters/">Helicopters</a></li>
+<li class="dropdown"><a href="/en/products/terrains/">Terrains</a></li>
+<li class="dropdown"><a href="/en/products/campaigns/">Campaigns</a></li>
+<li class="dropdown"><a href="/en/products/other/">Other</a></li>
+</ul></li><li class="dropdown"><a href="/en/downloads/">Downloads</a>
+<ul class="dropdown-menu" role="menu">
+<li class="dropdown"><a href="/en/downloads/world/">DCS World</a></li>
+<li class="dropdown"><a href="/en/downloads/texture_templates/">Texture templates</a></li>
+<li class="dropdown"><a href="/en/downloads/documentation/">Documentation</a></li>
+<li class="dropdown"><a href="/en/downloads/screenshots/">Screenshots</a></li>
+<li class="dropdown"><a href="/en/files/">User files</a></li>
+</ul></li><li class="dropdown"><a href="/en/shop/">E-Shop</a>
+<ul class="dropdown-menu" role="menu">
+<li class="dropdown"><a href="/en/shop/modules/">Modules</a></li>
+<li class="dropdown"><a href="/en/shop/terrains/">Terrains</a></li>
+<li class="dropdown"><a href="/en/shop/bundles/">Bundles</a></li>
+<li class="dropdown"><a href="/en/shop/campaigns/">Сampaigns</a></li>
+</ul></li><li class="dropdown"><a href="/en/support/">Support</a>
+<ul class="dropdown-menu" role="menu">
+<li class="dropdown"><a href="/en/links/">Useful Links</a></li>
+<li class="dropdown"><a href="/en/support/">User support</a></li>
+<li class="dropdown"><a href="/en/support/faq">Technical questions</a></li>
+<li class="dropdown"><a href="/en/support/miles_rules">Miles rules</a></li>
+<li class="dropdown"><a href="/en/support/license">License Agreement</a></li>
+</ul></li><li><a href="https://forum.dcs.world" target="_blank">Forums</a></li>
+</ul>
+<div class="menu-clear-left"></div>            	    <div id="title-search" class="search-box hidden-xs hidden-sm">
+    <form class="form-title-search" action="/en/search/">
+    <div class="input-group form-title-search">
+        <input id="title-search-input" type="text" name="q" value="" placeholder="Search here" size="20" maxlength="50" autocomplete="off" class="form-control" />
+        <span class="input-group-btn">
+        <input name="s" type="submit" value="Search" class="btn btn-search" />
+        </span>
+    </div>
+    </form>
+    </div>
+<script>
+   var jsControl = 
+        new JCTitleSearch({
+            'AJAX_PAGE' : '/en/auth/?register=yes',
+            'CONTAINER_ID': 'title-search',
+            'INPUT_ID': 'title-search-input',
+            'MIN_QUERY_LEN': 2
+        });
+</script>
+        </div>
+    </div>
+<div class="container">
+        <h1>Register</h1>
+            <div class="row well">
+            <div class="alert alert-danger padding">If your e-mail address is registered in <b>Hotmail/Outlook</b> (@hotmail, @msn, @live, @outlook), you must add our <b>digitalcombatsimulator.com</b> domain to the Safe Senders and Domains List so that the email from this site is never treated as junk.<br>To do this in <b>Hotmail/Outlook</b> open <i><u>Options -> Mail -> Junk email -> Safe senders</u></i> and add domain <b>digitalcombatsimulator.com</b>.</div>
+        <form method="post" action="/en/auth/?register=yes" name="regform" class="form-horizontal">
+                        <input type="hidden" name="AUTH_FORM" value="Y" />
+            <input type="hidden" name="TYPE" value="REGISTRATION" />
+
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-4">
+                    <label for="USER_NAME" >Name:</label>
+                    <input type="text" name="USER_NAME" maxlength="50" class="form-control" id="USER_NAME" maxlength="50" value="">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-4">
+                    <label for="USER_LAST_NAME" >Last Name:</label>
+                    <input type="text" name="USER_LAST_NAME" maxlength="50" class="form-control" id="USER_LAST_NAME" maxlength="50" value="">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-4">
+                    <label for="REGISTER_EMAIL" >E-Mail:<span class="text-danger">*</span></label>
+                    <input type="text" name="USER_EMAIL" maxlength="255" class="form-control" id="REGISTER_EMAIL" maxlength="50" value="">
+                </div>
+                <div class="col-xs-12 col-sm-7 middle text-danger" id="REGISTER_MESSAGE_EMAIL"></div>
+            </div>
+                            <div class="alert alert-info padding"><b>Attention!</b> A registration confirmation request will be sent to the specified e-mail address.</div>
+                        <div class="form-group">
+                <div class="col-xs-12 col-sm-4">
+                    <label for="REGISTER_LOGIN" >Login (min. 3 char.)<span class="text-danger">*</span></label>
+                    <input type="text" name="USER_LOGIN" maxlength="255" class="form-control" id="REGISTER_LOGIN" maxlength="50" value="">
+                </div>
+                <div class="col-xs-12 col-sm-7 middle text-danger" id="REGISTER_MESSAGE_LOGIN"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-4">
+                    <label for="REGISTER_PASSWORD" >Password:<span class="text-danger">*</span></label>
+                    <input type="password" name="USER_PASSWORD" maxlength="50" class="form-control" id="REGISTER_PASSWORD" maxlength="50" value="">
+                </div>
+                <div class="col-xs-1 middle no-padding bx-auth-secure">
+                                </div>
+                <div class="col-xs-12 col-sm-7 password text-info" id="REGISTER_MESSAGE_PASSWORD">The password must contain at least 8 characters, contain Latin uppercase letters (A-Z), contain Latin lowercase letters (a-z), contain digits (0-9).</div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-4">
+                    <label for="REGISTER_CONFIRM_PASSWORD">Password confirmation:<span class="text-danger">*</span></label>
+                    <input type="password" name="USER_CONFIRM_PASSWORD" maxlength="50" class="form-control" id="REGISTER_CONFIRM_PASSWORD" maxlength="50" value="">
+                </div>
+                <div class="col-xs-12 col-sm-7 middle text-danger" id="REGISTER_MESSAGE_CONFIRM_PASSWORD"></div>
+            </div>
+                                        <div class="form-group">
+                    <div class="col-xs-12 col-sm-4">
+                        <input type="hidden" name="captcha_sid" value="0b4b5f3323e1a3d1255fb284a22ba583" />
+                        <img id="captcha-img" src="/bitrix/tools/captcha.php?captcha_sid=0b4b5f3323e1a3d1255fb284a22ba583" width="180" height="40" alt="CAPTCHA" /><br /><br />
+                        <label for="captcha_word" >Type symbols from image</label><br />
+                        <input type="text" name="captcha_word" maxlength="50" class="form-control" id="captcha_word" maxlength="50" value="">
+                    </div>
+                </div>
+                        <div class="checkbox margin-bottom">
+                <input type="hidden" name="UF_SUBSCRIBE_NEWSLETTER" value="0">
+                <label>
+                    <input type="checkbox" checked="checked" name="UF_SUBSCRIBE_NEWSLETTER" id="UF_SUBSCRIBE_NEWSLETTER" value="1">
+                    Receive DCS weekly newsletter                </label>
+            </div>
+                        <div class="form-group">
+                <div class="col-xs-12 col-sm-4 margin-top">
+                    <button type="submit" class="btn btn-primary" name="send_account_info">Register</button>
+                </div>
+            </div>
+        </form>
+        <script type="text/javascript">
+        document.regform.USER_NAME.focus();
+        </script>
+    </div>
+<script type="text/javascript">
+    BX.message({
+        PASSWORD_REQUIREMENTS: 'The password must contain at least 8 characters, contain Latin uppercase letters (A-Z), contain Latin lowercase letters (a-z), contain digits (0-9).',
+        WRONG_CONFIRMATION: 'Incorrect password confirmation',
+        MIN_LOGIN: 'Login must contain 3 or more characters',
+        USER_WITH_EMAIL_EXIST: 'A user with this e-mail address already exists',
+        WRONG_EMAIL: 'Incorrect E-Mail',
+        UNVERIFIED_EMAIL: 'E-Mail does not exist',
+        FORBIDDEN_EMAIL: 'E-Mail address from this domain is not allowed',
+        USER_EXIST: 'User with this login already exists',
+    });
+</script></div>
+        <div id="social-buttons-block" class="row">
+        <div class="col-xs-12">
+            <div class="container">           
+    FOLLOW US
+    <ul id="follow-list">
+        <li>
+            <a href="https://www.facebook.com/eagle.dynamics" target="_blank">
+                <img src="/local/templates/dcs/images/facebook.png" alt="Facebook">
+            </a>
+        </li>
+        <li>
+            <a href="https://discord.gg/eagledynamics" target="_blank">
+                <img src="/local/templates/dcs/images/discord.png" alt="Discord">
+            </a>
+        </li>
+        <li>
+            <a href="https://www.instagram.com/digitalcombatsimulator" target="_blank">
+                <img src="/local/templates/dcs/images/instagram.png" alt="Instagram">
+            </a>
+        </li>
+        <li>
+            <a href="https://twitter.com/eagledynamics" target="_blank">
+                <img src="/local/templates/dcs/images/twitter.png" alt="Twitter">
+            </a>
+        </li>
+        <li>
+            <a href="https://www.youtube.com/user/eagledynamicstv" target="_blank">
+                <img src="/local/templates/dcs/images/youtube.png" alt="YouTube">
+            </a>
+        </li>
+    </ul>
+</div>        </div>
+    </div>
+        <div class="row" id="awards-block">
+        <div class="col-xs-12">
+                        <div class="img-link">
+                <img src="/local/templates/dcs/images/button/pic1.png" alt="IGN.COM Editors' Choice award" title="IGN.COM Editors' Choice award"/>
+            </div>
+            <div class="img-link">
+                <img src="/local/templates/dcs/images/button/pic2.png" alt="Computer Active Buy It! 5 stars award" title="Computer Active Buy It! 5 stars award"/>
+            </div>
+            <div class="img-link">
+                <img src="/local/templates/dcs/images/button/pic3.png" alt="PC Gamer Editor's Choice 5 stars award" title="PC Gamer Editor's Choice 5 stars award"/>
+            </div>
+            <div class="img-link">
+                <img src="/local/templates/dcs/images/button/pic4.png" alt="'Tipp der Redaktion' from the German magazine FS Magazin" title="'Tipp der Redaktion' from the German magazine FS Magazin"/>
+            </div>
+            <div class="img-link">
+                <img src="/local/templates/dcs/images/button/pic5.png" alt="Eurogamer award" title="Eurogamer award"/>
+            </div>
+            <div class="img-link">
+                <img src="/local/templates/dcs/images/button/pic6.png" alt="PC Pilot Classic Product award" title="PC Pilot Classic Product award"/>
+            </div>
+            <div class="img-link">
+                <img src="/local/templates/dcs/images/button/pic7.png" alt="PC Pilot Platinum award" title="PC Pilot Platinum award"/>
+            </div>
+            <div class="img-link">
+                <img src="/local/templates/dcs/images/button/pic8.png" alt="Microsim award" title="Microsim award"/>
+            </div>
+            <div class="img-link">
+                <img src="/local/templates/dcs/images/button/pic9.png" alt="Swedish award" title="Swedish award"/>
+            </div>
+        </div>
+    </div> 
+        <footer>
+            <ul class="main-list">
+<li><div class="bottom-block">
+<p><a href="/en/products/">Products</a></p>
+<ul class="inner">
+<li><a href="/en/products/world/">DCS World</a></li>
+<li><a href="/en/products/planes/">Planes</a></li>
+<li><a href="/en/products/helicopters/">Helicopters</a></li>
+<li><a href="/en/products/terrains/">Terrains</a></li>
+<li><a href="/en/products/campaigns/">Campaigns</a></li>
+<li><a href="/en/products/other/">Other</a></li>
+</ul></div></li><li><div class="bottom-block">
+<p><a href="/en/downloads/">Downloads</a></p>
+<ul class="inner">
+<li><a href="/en/downloads/world/">DCS World</a></li>
+<li><a href="/en/downloads/texture_templates/">Texture templates</a></li>
+<li><a href="/en/downloads/documentation/">Documentation</a></li>
+<li><a href="/en/downloads/screenshots/">Screenshots</a></li>
+<li><a href="/en/files/">User files</a></li>
+</ul></div></li><li><div class="bottom-block">
+<p><a href="/en/support/">Support</a></p>
+<ul class="inner">
+<li><a href="/en/links/">Useful Links</a></li>
+<li><a href="/en/support/">Tickets</a></li>
+<li><a href="/en/support/faq">Technical questions</a></li>
+<li><a href="https://forum.dcs.world" target="_blank">Forums</a></li>
+<li><a href="/en/contacts">Contacts</a></li>
+</ul></div></li><li><div class="bottom-block">
+<p><a href="/en/legal/">Legal</a></p>
+<ul class="inner">
+<li><a href="/en/legal/">Legal information</a></li>
+<li><a href="/en/legal/gdpr.php">Privacy policy EU</a></li>
+<li><a href="/en/legal/terms_of_service.php">Terms of service</a></li>
+<li><a href="/en/legal/privacy_policy.php">Privacy and cookie policy</a></li>
+</ul></div></li>            <li><div class="bottom-block"><p><a href="/en/vacancies/">Vacancies</a></p></div></li>
+</ul> 
+        </footer>
+
+        <div id="cookies" class="row hidden">
+	<script type="text/javascript">function closeCookies(){$("#cookies").addClass("hidden")}function applyCookies(){closeCookies();var e=new Date((new Date).getTime()+31536e6);document.cookie="APPLY_COOKIES=Y; path=/; expires="+e.toUTCString()}function getCookie(e){var o=document.cookie.match(new RegExp("(?:^|; )"+e.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g,"\\$1")+"=([^;]*)"));return o?decodeURIComponent(o[1]):void 0}$(document).ready(function(){"Y"!=getCookie("APPLY_COOKIES")&&$("#cookies").removeClass("hidden")});</script>
+    <div class="pull-right padding-left">
+        <button type="button" class="close" onclick="return applyCookies(this);" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="container">
+        <span>We use cookies to provide you with a better onsite experience. By continuing to browse the site you are agreeing to our use of cookies in accordance with our <a href="/en/legal/privacy_policy.php">Cookie Policy</a>.</span>
+    </div>
+</div>
+        <div id="ground" class="row">
+            <div class="col-md-7 hidden-sm hidden-xs error"><small>Found a typo? Select it with your mouse and press Ctrl+Enter.</small></div>
+            <div class="col-sm-12 col-md-5 copyright"><small>&copy; 1991-2023, Eagle Dynamics SA</small></div>
+        </div>
+        <div id="bx-composite-banner"></div>
+        </body>
+</html>
