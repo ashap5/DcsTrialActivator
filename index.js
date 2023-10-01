@@ -112,13 +112,16 @@
 
     // Create the activate button and profile menu
     function createActivateButton() {
+        const MenuDivUpperButtons = document.createElement('div');
+        MenuDivUpperButtons.style.display = 'flex';
         const activateButton = document.createElement('button');
         activateButton.textContent = 'Auto-Trial';
         activateButton.style.position = 'fixed';
         activateButton.style.top = '10px';
         activateButton.style.left = '10px';
         activateButton.style.zIndex = '9999';
-        document.body.appendChild(activateButton);
+        document.body.appendChild(MenuDivUpperButtons);
+        MenuDivUpperButtons.append(activateButton);
 
         // Example profiles (you can add more profiles or customize the websites for each profile)
         const defaultProfiles = {
