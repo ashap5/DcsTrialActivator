@@ -376,6 +376,28 @@
 
             async function CreateAccount()
             {
+                async function GetCaptha()
+                {
+                    const GetCapthaPage = await fetch("https://www.digitalcombatsimulator.com/en/auth/?register=yes", {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "text/html",
+                        }
+                    });
+
+                    let capthawithsid = (await GetCapthaPage.text()).match(/\?captcha_sid=\w+/);
+
+
+                    let captchaid = capthawithsid[0].replace("?captcha_sid=", "");
+
+                    const CaptchaImageLink = "https://www.digitalcombatsimulator.com/bitrix/tools/captcha.php?captcha_sid=" + captchaid;
+
+                    return {captchaid : captchaid, CaptchaImageLink : CaptchaImageLink};
+
+                }
+                let {captchaid, CaptchaImageLink} = await GetCaptha();
+                //todo set the captcha image to CaptchaImageLink
+
                 const url = 'https://www.digitalcombatsimulator.com/en/auth/?register=yes';
 
                 const headers = {
@@ -399,18 +421,17 @@
                     'Accept-Encoding': 'gzip, deflate, br',
                     'Accept-Language': 'en-US,en;q=0.9',
                 };
-
                 const formData = new FormData();
                 formData.append('AUTH_FORM', 'Y');
                 formData.append('TYPE', 'REGISTRATION');
-                formData.append('USER_NAME', 'mike');
-                formData.append('USER_LAST_NAME', 'morin');
+                formData.append('USER_NAME', Math.random().toString(36).substring(7)); //make it random 5 letters
+                formData.append('USER_LAST_NAME', Math.random().toString(36).substring(7));
                 formData.append('USER_EMAIL', mailadress);
                 formData.append('USER_LOGIN', username);
                 formData.append('USER_PASSWORD', password);
                 formData.append('USER_CONFIRM_PASSWORD', password);
-                formData.append('captcha_sid', '070c616980cb7c7c92060bc3342907a0'); // todo get the captcha and show it to the user
-                formData.append('captcha_word', 'BCK5T');
+                formData.append('captcha_sid', captchaid);
+                formData.append('captcha_word', 'BCK5T'); //put the user entered captha here
                 formData.append('UF_SUBSCRIBE_NEWSLETTER', '0');
                 formData.append('send_account_info', '');
 
