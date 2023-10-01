@@ -113,13 +113,15 @@
     function createActivateButton() {
         const MenuDivUpperButtons = document.createElement('div');
         MenuDivUpperButtons.style.display = 'flex';
+        MenuDivUpperButtons.style.width = '100%';
+        MenuDivUpperButtons.style.justifyContent = 'space-between'; // todo should work, but doesn't.
         const activateButton = document.createElement('button');
         activateButton.textContent = 'Auto-Trial';
         activateButton.style.position = 'fixed';
         activateButton.style.top = '10px';
         activateButton.style.left = '10px';
         activateButton.style.zIndex = '9999';
-        document.body.appendChild(MenuDivUpperButtons);
+        document.body.appendChild(MenuDivUpperButtons); // myslim ze spravnejsie by bolo append na profileMenu ale nefunguje, mozno fix ale netreba
         MenuDivUpperButtons.append(activateButton);
 
         // Example profiles (you can add more profiles or customize the websites for each profile)
@@ -163,6 +165,7 @@
         // Function to create the profile menu
         function createProfileMenu() {
             profileMenu = document.createElement('div');
+            profileMenu.id = 'profileMenu';
             profileMenu.style.position = 'fixed';
             profileMenu.style.color = 'green'
             profileMenu.style.top = '50px';
@@ -201,7 +204,32 @@
                 CreateLoginPasswordWindow()
             });
 
-
+            function CreateLoginPasswordWindow() {
+                // todo make it work by "unhiding" the window instead of creating it because this way you can just spam the button and break it
+                // have a login username and login passowrd field in it, centered in the entire page
+                const LoginPasswordContainerDiv = document.createElement('div');
+                document.body.appendChild(LoginPasswordContainerDiv);
+                LoginPasswordContainerDiv.style.display = 'flex';
+                LoginPasswordContainerDiv.style.justifySelf = 'center';
+                LoginPasswordContainerDiv.style.width = '20%';
+                LoginPasswordContainerDiv.style.height = '20%';
+                LoginPasswordContainerDiv.style.zIndex = '10';
+                LoginPasswordContainerDiv.style.backgroundColor = 'blue';
+                LoginPasswordContainerDiv.id = 'LoginContainer';
+                const LoginInput = document.createElement('input');
+                LoginInput.type = 'text';
+                LoginPasswordContainerDiv.append(LoginInput);
+                const PasswordInput = document.createElement('input');
+                PasswordInput.type = 'password';
+                LoginPasswordContainerDiv.append(PasswordInput);
+                const captchaImg = document.createElement('img');
+                captchaImg.id = 'captcha-img';
+                captchaImg.style.width = '180px';
+                captchaImg.style.height = '40px';
+                captchaImg.alt = 'CAPTCHA';
+                captchaImg.src = 'SEM SRC CAPTCHA IMG'; //SEM SRC CAPTCHA IMG, nejak asi cez variable ale to ja neviem
+                LoginPasswordContainerDiv.append(captchaImg);
+            }
             // Function to update the websites list when the profile is changed
             function updateWebsitesList() {
                 const selectedProfile = profileDropdown.value;
