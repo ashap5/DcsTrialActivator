@@ -209,8 +209,8 @@
                 // have a login username and login passowrd field in it, centered in the entire page
                 const LoginPasswordContainerDiv = document.createElement('div');
                 document.body.appendChild(LoginPasswordContainerDiv);
-                LoginPasswordContainerDiv.style.display = 'flex';
-                LoginPasswordContainerDiv.style.justifySelf = 'center';
+                LoginPasswordContainerDiv.style.display = 'none';
+                LoginPasswordContainerDiv.style.position = 'fixed';
                 LoginPasswordContainerDiv.style.width = '20%';
                 LoginPasswordContainerDiv.style.height = '20%';
                 LoginPasswordContainerDiv.style.zIndex = '10';
