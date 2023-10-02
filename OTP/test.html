@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/@otplib/preset-browser@^12.0.0/buffer.js"></script>
+    <script src="https://unpkg.com/@otplib/preset-browser@^12.0.0/index.js"></script>
+
+    <script type="text/javascript">
+        let secret = 'KVKFKRCPNZQUYMLXOVYDSQKJKZDTSRLD';
+        const token = window.otplib.authenticator.generate(secret);
+        console.log(token);
+    </script></head>
+<body>
+
+
+</body></html>
