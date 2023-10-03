@@ -198,16 +198,16 @@
             //move it more to the right
             MakeNewAccountButton.style.marginTop = '5px';
 
-            MakeNewAccountButton.addEventListener('click', () => {
-                // MakeNewAccount().then(
-                //     (r) => {
-                //         console.log(r)
-                //     }
-                // )
-               document.getElementById('LoginContainer').style.display = 'block';
+            MakeNewAccountButton.addEventListener('click', async () => {
+                console.log("opened new account menu")
+                await GetCaptha().then(
+                    (r) => {
+                        document.getElementById("captcha-img").src = r.captchaImageLink;
+                    });
+                document.getElementById('LoginContainer').style.display = 'block';
             });
 
-            function CreateLoginPasswordWindow() {
+            async function CreateLoginPasswordWindow() { // called immediately(constructor)
                 const LoginPasswordContainerDiv = document.createElement('div');
                 document.body.appendChild(LoginPasswordContainerDiv);
                 LoginPasswordContainerDiv.style.display = 'none';
@@ -258,8 +258,7 @@
                 captchaImg.id = 'captcha-img';
                 captchaImg.style.width = '180px';
                 captchaImg.style.height = '40px';
-                captchaImg.alt = 'CAPTCHA';
-                captchaImg.src = 'https://www.digitalcombatsimulator.com/bitrix/tools/captcha.php?captcha_sid=04fc45be15ada36f6751bfa4f4d39428'; //SEM SRC CAPTCHA IMG, nejak asi cez variable ale to ja neviem
+                captchaImg.alt = 'CAPTCHA';//SEM SRC CAPTCHA IMG, nejak asi cez variable ale to ja neviem
                 LoginPasswordContainerDiv.append(captchaImg);
 
                 const captchaText = document.createElement('input');
@@ -278,17 +277,18 @@
                 cancelButton.style.scale = '1.2';
                 AccountWindowButtonContainer.append(cancelButton);
 
-                const NewAccountButton = document.createElement('button');
-                NewAccountButton.textContent = 'Create Account';
-                NewAccountButton.style.scale = '1.2';
-                NewAccountButton.onclick = () => {
-                    MakeNewAccount(username, password).then(
-                        (r) => {
-                            console.log(r)
-                        });
-                }
-                AccountWindowButtonContainer.append(NewAccountButton);
+                const CreateAccountButton = document.createElement('button');
+                CreateAccountButton.textContent = 'Create Account';
+                CreateAccountButton.style.scale = '1.2';
+                CreateAccountButton.onclick = async () => {
+                    const login = Username.value
+                    const password = PasswordInput.value
+                    const captcha = captchaText.value
+                    const captchasid = document.getElementById("captcha-img").src.split("?")[1].split("&")[0].split("=")[1]
+                    await MakeNewAccount(login,password,captcha,captchasid)
 
+                }
+                AccountWindowButtonContainer.append(CreateAccountButton);
             }
             // Function to update the websites list when the profile is changed
             function updateWebsitesList() {
@@ -485,11 +485,12 @@
         }
 
     }
-    async function MakeNewAccount(username, password, captcha)
+    async function MakeNewAccount(username, password, captcha,captchasid)
     {
         const waitFor = delay => new Promise(resolve => setTimeout(resolve, delay));
 
         let {mailadress, token} = await GetEmailAdress();
+        await CreateAccount(username,mailadress,password,captchasid,captcha);
         while (await CheckEmailCount() < 1) {
             console.log("Waiting for email");
             await waitFor(3000);
@@ -538,30 +539,11 @@
             return {mailadress : mailadress + "@" + domain, token : token};
         }
 
-        async function CreateAccount()
+        async function CreateAccount(username,mailadress,password,captchasid,captcha) // debug the request
         {
-            async function GetCaptha()
-            {
-                const GetCapthaPage = await fetch("https://www.digitalcombatsimulator.com/en/auth/?register=yes", {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "text/html",
-                    }
-                });
-
-                let capthawithsid = (await GetCapthaPage.text()).match(/\?captcha_sid=\w+/);
-
-
-                let captchaid = capthawithsid[0].replace("?captcha_sid=", "");
-
-                const CaptchaImageLink = "https://www.digitalcombatsimulator.com/bitrix/tools/captcha.php?captcha_sid=" + captchaid;
-
-                return {captchaid : captchaid, CaptchaImageLink : CaptchaImageLink};
-
-            }
-            let {captchaid, CaptchaImageLink} = await GetCaptha();
-            //todo set the captcha image to CaptchaImageLink
-
+            console.log(username,mailadress,password,captchasid,captcha);
+            console.log("Creating account")
+                // moved  get captcha
             const url = 'https://www.digitalcombatsimulator.com/en/auth/?register=yes';
 
             const headers = {
@@ -594,8 +576,8 @@
             formData.append('USER_LOGIN', username);
             formData.append('USER_PASSWORD', password);
             formData.append('USER_CONFIRM_PASSWORD', password);
-            formData.append('captcha_sid', captchaid);
-            formData.append('captcha_word', 'BCK5T'); //put the user entered captha here
+            formData.append('captcha_sid', captchasid);
+            formData.append('captcha_word', captcha); //put the user entered captha here
             formData.append('UF_SUBSCRIBE_NEWSLETTER', '0');
             formData.append('send_account_info', '');
 
@@ -607,6 +589,7 @@
 
             console.log('Response:', response);
         }
+
 
         async function CheckEmailCount()
         {
@@ -625,6 +608,31 @@
             return emailjson['hydra:totalItems'];
         }
     }
+    async function GetCaptha()
+    {
+        // todo check if logged in otherwise throws a null
+        const GetCapthaPage = await fetch("https://www.digitalcombatsimulator.com/en/auth/?register=yes", {
+            method: "GET",
+            headers: {
+                "Content-Type": "text/html",
+            }
+        });
+
+        let capthaWithSid = (await GetCapthaPage.text()).match(/\?captcha_sid=\w+/);
+        console.log(capthaWithSid);
+        if (capthaWithSid === null) {
+            console.log("logged in/ no captha found");
+            return;
+        }
+
+
+        let captchaid = capthaWithSid[0].replace("?captcha_sid=", "");
+
+        const captchaImageLink = "https://www.digitalcombatsimulator.com/bitrix/tools/captcha.php?captcha_sid=" + captchaid;
+        return {captchaid : captchaid, captchaImageLink : captchaImageLink};
+
+    }
+    //todo set the captcha image to CaptchaImageLink
     // Add the activate button and profile menu when the DOM is ready
     document.addEventListener('DOMContentLoaded', () => {
         createActivateButton();
