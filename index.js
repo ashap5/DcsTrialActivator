@@ -227,7 +227,7 @@
                 captchaImg.style.width = '180px';
                 captchaImg.style.height = '40px';
                 captchaImg.alt = 'CAPTCHA';
-                captchaImg.src = 'SEM SRC CAPTCHA IMG'; //SEM SRC CAPTCHA IMG, nejak asi cez variable ale to ja neviem
+                captchaImg.src = 'https://www.digitalcombatsimulator.com/bitrix/tools/captcha.php?captcha_sid=04fc45be15ada36f6751bfa4f4d39428'; //SEM SRC CAPTCHA IMG, nejak asi cez variable ale to ja neviem
                 LoginPasswordContainerDiv.append(captchaImg);
             }
             // Function to update the websites list when the profile is changed
@@ -426,7 +426,7 @@
         }
 
     }
-    async function MakeNewAccount(username, password)
+    async function MakeNewAccount(username, password, captcha)
     {
         const waitFor = delay => new Promise(resolve => setTimeout(resolve, delay));
 
