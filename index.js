@@ -111,18 +111,13 @@
 
     // Create the activate button and profile menu
     function createActivateButton() {
-        const MenuDivUpperButtons = document.createElement('div');
-        MenuDivUpperButtons.style.display = 'flex';
-        MenuDivUpperButtons.style.width = '100%';
-        MenuDivUpperButtons.style.justifyContent = 'space-between'; // todo should work, but doesn't.
         const activateButton = document.createElement('button');
         activateButton.textContent = 'Auto-Trial';
         activateButton.style.position = 'fixed';
         activateButton.style.top = '10px';
         activateButton.style.left = '10px';
         activateButton.style.zIndex = '9999';
-        document.body.appendChild(MenuDivUpperButtons); // myslim ze spravnejsie by bolo append na profileMenu ale nefunguje, mozno fix ale netreba
-        MenuDivUpperButtons.append(activateButton);
+        document.body.appendChild(activateButton);
 
         // Example profiles (you can add more profiles or customize the websites for each profile)
         const defaultProfiles = {
@@ -178,6 +173,13 @@
             profileMenu.style.overflowY = 'scroll'; // Enable vertical scrolling
             profileMenu.style.maxHeight = '80vh'; // Set a maximum height for the profile menu
 
+            // Create container for upper buttons
+            const MenuDivUpperButtons = document.createElement('div');
+            MenuDivUpperButtons.id = 'upperButtonsContainer'
+            MenuDivUpperButtons.style.display = 'flex';
+            MenuDivUpperButtons.style.width = '100%';
+            MenuDivUpperButtons.style.justifyContent = 'space-between'; // todo should work, but doesn't.
+            profileMenu.append(MenuDivUpperButtons);
 
             // Create the dropdown menu with profiles
             const profileDropdown = document.createElement('select');
@@ -188,6 +190,7 @@
                 option.textContent = profile; // Display the profile name in the dropdown
                 profileDropdown.appendChild(option);
             }
+            MenuDivUpperButtons.append(profileDropdown);
 
             const MakeNewAccountButton = document.createElement('button');
             MenuDivUpperButtons.append(MakeNewAccountButton);
@@ -201,27 +204,56 @@
                 //         console.log(r)
                 //     }
                 // )
-                CreateLoginPasswordWindow()
+               document.getElementById('LoginContainer').style.display = 'block';
             });
 
             function CreateLoginPasswordWindow() {
-                // todo make it work by "unhiding" the window instead of creating it because this way you can just spam the button and break it
-                // have a login username and login passowrd field in it, centered in the entire page
                 const LoginPasswordContainerDiv = document.createElement('div');
                 document.body.appendChild(LoginPasswordContainerDiv);
                 LoginPasswordContainerDiv.style.display = 'none';
                 LoginPasswordContainerDiv.style.position = 'fixed';
-                LoginPasswordContainerDiv.style.width = '20%';
-                LoginPasswordContainerDiv.style.height = '20%';
-                LoginPasswordContainerDiv.style.zIndex = '10';
-                LoginPasswordContainerDiv.style.backgroundColor = 'blue';
+                LoginPasswordContainerDiv.style.top = '50%';
+                LoginPasswordContainerDiv.style.left = '40%';
                 LoginPasswordContainerDiv.id = 'LoginContainer';
-                const LoginInput = document.createElement('input');
-                LoginInput.type = 'text';
-                LoginPasswordContainerDiv.append(LoginInput);
+                LoginPasswordContainerDiv.style.width = '25%';
+                LoginPasswordContainerDiv.style.backgroundColor = '#f59e10';
+                LoginPasswordContainerDiv.style.padding = '10px';
+                LoginPasswordContainerDiv.style.margin = '15px';
+                LoginPasswordContainerDiv.style.boxShadow = 'black';
+                LoginPasswordContainerDiv.style.borderRadius = '10px';
+
+                const LoginInputContainer = document.createElement('div');
+                LoginInputContainer.style.marginBottom = '10px';
+                LoginPasswordContainerDiv.append(LoginInputContainer);
+
+                const LoginText = document.createElement('label');
+                LoginText.textContent = 'Login Name';
+                LoginText.style.margin = '1px';
+                LoginInputContainer.append(LoginText);
+
+                const Username = document.createElement('input');
+                Username.type = 'text';
+                Username.style.width = '100%';
+                Username.style.padding = '5px';
+                LoginInputContainer.append(Username);
+
+                const PasswordInputContainer = document.createElement('div');
+                PasswordInputContainer.style.marginBottom = '10px';
+                LoginPasswordContainerDiv.append(PasswordInputContainer);
+
+
+                const PasswordText = document.createElement('label');
+                PasswordText.textContent = 'Password';
+                PasswordText.style.margin = '0px';
+                PasswordInputContainer.append(PasswordText);
+
+                // todo Make a hide/display text button (switch type between password and text)
                 const PasswordInput = document.createElement('input');
-                PasswordInput.type = 'password';
-                LoginPasswordContainerDiv.append(PasswordInput);
+                PasswordInput.type = 'text';
+                PasswordInput.style.width = '100%';
+                PasswordInput.style.padding = '5px';
+                PasswordInputContainer.append(PasswordInput);
+
                 const captchaImg = document.createElement('img');
                 captchaImg.id = 'captcha-img';
                 captchaImg.style.width = '180px';
@@ -229,6 +261,34 @@
                 captchaImg.alt = 'CAPTCHA';
                 captchaImg.src = 'https://www.digitalcombatsimulator.com/bitrix/tools/captcha.php?captcha_sid=04fc45be15ada36f6751bfa4f4d39428'; //SEM SRC CAPTCHA IMG, nejak asi cez variable ale to ja neviem
                 LoginPasswordContainerDiv.append(captchaImg);
+
+                const captchaText = document.createElement('input');
+                captchaText.type = 'text';
+                LoginPasswordContainerDiv.append(captchaText);
+                
+                const AccountWindowButtonContainer = document.createElement('div');
+                AccountWindowButtonContainer.style.display = 'flex';
+                AccountWindowButtonContainer.style.justifyContent = 'space-between';
+                AccountWindowButtonContainer.style.margin = '5px';
+                AccountWindowButtonContainer.style.marginRight = '10px';
+                LoginPasswordContainerDiv.append(AccountWindowButtonContainer)
+                
+                const cancelButton = document.createElement('button');
+                cancelButton.textContent = 'Cancel';
+                cancelButton.style.scale = '1.2';
+                AccountWindowButtonContainer.append(cancelButton);
+
+                const NewAccountButton = document.createElement('button');
+                NewAccountButton.textContent = 'Create Account';
+                NewAccountButton.style.scale = '1.2';
+                NewAccountButton.onclick = () => {
+                    MakeNewAccount(username, password).then(
+                        (r) => {
+                            console.log(r)
+                        });
+                }
+                AccountWindowButtonContainer.append(NewAccountButton);
+
             }
             // Function to update the websites list when the profile is changed
             function updateWebsitesList() {
@@ -304,8 +364,6 @@
             });
 
             // Add elements to the profile menu
-            profileMenu.appendChild(profileDropdown);
-            profileMenu.appendChild(MakeNewAccountButton)
             profileMenu.appendChild(websitesList);
             profileMenu.appendChild(startButton);
             profileMenu.appendChild(closeButton);
@@ -315,6 +373,7 @@
             // Update the websites list when the profile is changed
             profileDropdown.addEventListener('change', updateWebsitesList);
             updateWebsitesList(); // Initialize the websites list
+            CreateLoginPasswordWindow();
         }
 
         // Function to get the profile name from the URL
