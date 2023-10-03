@@ -212,8 +212,8 @@
                 document.body.appendChild(LoginPasswordContainerDiv);
                 LoginPasswordContainerDiv.style.display = 'none';
                 LoginPasswordContainerDiv.style.position = 'fixed';
-                LoginPasswordContainerDiv.style.top = '50%';
-                LoginPasswordContainerDiv.style.left = '40%';
+                LoginPasswordContainerDiv.style.top = '35%';
+                LoginPasswordContainerDiv.style.left = '35%';
                 LoginPasswordContainerDiv.id = 'LoginContainer';
                 LoginPasswordContainerDiv.style.width = '25%';
                 LoginPasswordContainerDiv.style.backgroundColor = '#f59e10';
