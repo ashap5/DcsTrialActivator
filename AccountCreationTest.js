@@ -1,4 +1,4 @@
-async function CreateAccount(username,mailadress,password,captchasid,captcha) // todo debug the request
+async function CreateAccountold(username, mailadress, password, captchasid, captcha) // todo debug the request
 {
     console.log(username,mailadress,password,captchasid,captcha);
     console.log("Creating account")
@@ -48,3 +48,26 @@ async function CreateAccount(username,mailadress,password,captchasid,captcha) //
 
     console.log('Response:', response);
 }
+// await CreateAccount("test","miyaxib132@fesgrid.com","testAd56gG","0aa308fa8975d1fb95e4123520c79c3c","WLFCP");
+async function CreateAccount(username,emailadress,password,captchasid,captchaword){
+    await fetch("https://www.digitalcombatsimulator.com/en/auth/?register=yes", {
+        "credentials": "include",
+        "headers": {
+            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/118.0",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+            "Accept-Language": "en-US,en;q=0.5",
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Upgrade-Insecure-Requests": "1",
+            "Sec-Fetch-Dest": "document",
+            "Sec-Fetch-Mode": "navigate",
+            "Sec-Fetch-Site": "same-origin",
+            "Sec-Fetch-User": "?1",
+            "Sec-GPC": "1"
+        },
+        "referrer": "https://www.digitalcombatsimulator.com/en/auth/?register=yes",
+        "body": `AUTH_FORM=Y&TYPE=REGISTRATION&USER_NAME=pasha&USER_LAST_NAME=ashoa&USER_EMAIL=${emailadress}&USER_LOGIN=${username}&USER_PASSWORD=${password}&USER_CONFIRM_PASSWORD=${password}&captcha_sid=${captchasid}&captcha_word=${captchaword}&UF_SUBSCRIBE_NEWSLETTER=0&send_account_info=`,
+        "method": "POST",
+        "mode": "cors"
+    });
+}
+await fetchexportedfromFirefox("pasha318","m789@diginey.com","testAd56gG","0aa308fa8975d1fb95e4123520c79c3c","WLFCP");
