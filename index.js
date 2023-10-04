@@ -242,6 +242,8 @@
                 LoginPasswordContainerDiv.append(PasswordInputContainer);
 
 
+
+
                 const PasswordText = document.createElement('label');
                 PasswordText.textContent = 'Password';
                 PasswordText.style.margin = '0px';
@@ -252,6 +254,11 @@
                 PasswordInput.type = 'text';
                 PasswordInput.style.width = '100%';
                 PasswordInput.style.padding = '5px';
+                const CheckPassword = function (e)
+                {
+                    console.log(CheckPasswordValidity(PasswordInput.value)); //tido add text that says password is too weak mozno aj text dat aky musi byt
+                }
+                PasswordInput.addEventListener('input', CheckPassword);
                 PasswordInputContainer.append(PasswordInput);
 
                 const captchaImg = document.createElement('img');
@@ -275,7 +282,11 @@
                 const cancelButton = document.createElement('button');
                 cancelButton.textContent = 'Cancel';
                 cancelButton.style.scale = '1.2';
+                cancelButton.onclick = () => {
+                    LoginPasswordContainerDiv.style.display = 'none';
+                }
                 AccountWindowButtonContainer.append(cancelButton);
+
 
                 const CreateAccountButton = document.createElement('button');
                 CreateAccountButton.textContent = 'Create Account';
@@ -603,6 +614,35 @@
 
         const captchaImageLink = "https://www.digitalcombatsimulator.com/bitrix/tools/captcha.php?captcha_sid=" + captchaid;
         return {captchaid : captchaid, captchaImageLink : captchaImageLink};
+
+    }
+    async function CheckEmailValidity(email) {
+        const res = await fetch("https://www.digitalcombatsimulator.com/local/templates/dcs/components/bitrix/system.auth.registration/.default/check_fields.php", {
+            "headers": {
+                "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            },
+            "body": `email=${email}&type=email`,
+            "method": "POST",
+        });
+        const json = await res.json();
+        console.log(json);
+    }
+    async function CheckUserNameValidity(username) {
+        const res = await fetch("https://www.digitalcombatsimulator.com/local/templates/dcs/components/bitrix/system.auth.registration/.default/check_fields.php", {
+            "headers": {
+                "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            },
+            "body": `login=${username}&type=login`,
+            "method": "POST",
+        });
+        const json = await res.json();
+        console.log(json);
+    }
+    function CheckPasswordValidity(password) {
+        return !!password.match(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/);
+    }
+    function CheckPasswordMatch(password, password2) {
+        return password === password2;
 
     }
     //todo set the captcha image to CaptchaImageLink
