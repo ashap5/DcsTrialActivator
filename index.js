@@ -235,6 +235,11 @@
                 Username.type = 'text';
                 Username.style.width = '100%';
                 Username.style.padding = '5px';
+                const CheckUsername = function (e)
+                {
+                    console.log(CheckUserNameValidity(Username.value));
+                }
+                Username.addEventListener('change', CheckUsername);
                 LoginInputContainer.append(Username);
 
                 const PasswordInputContainer = document.createElement('div');
@@ -291,9 +296,13 @@
                 const CreateAccountButton = document.createElement('button');
                 CreateAccountButton.textContent = 'Create Account';
                 CreateAccountButton.style.scale = '1.2';
-                CreateAccountButton.onclick = async () => {
+                CreateAccountButton.onclick = async () => { //todo add email and login check also on create account maybe password for redundancy
                     const login = Username.value
                     const password = PasswordInput.value
+                    if (!await CheckUserNameValidity(login) || !CheckPasswordValidity(password)) {
+                        alert("wrong username or password") //todo show at as text near the input fields
+                        return;
+                    }
                     const captcha = captchaText.value
                     const captchasid = document.getElementById("captcha-img").src.split("?")[1].split("&")[0].split("=")[1]
                     await MakeNewAccount(login,password,captcha,captchasid)
@@ -616,17 +625,6 @@
         return {captchaid : captchaid, captchaImageLink : captchaImageLink};
 
     }
-    async function CheckEmailValidity(email) {
-        const res = await fetch("https://www.digitalcombatsimulator.com/local/templates/dcs/components/bitrix/system.auth.registration/.default/check_fields.php", {
-            "headers": {
-                "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-            },
-            "body": `email=${email}&type=email`,
-            "method": "POST",
-        });
-        const json = await res.json();
-        console.log(json);
-    }
     async function CheckUserNameValidity(username) {
         const res = await fetch("https://www.digitalcombatsimulator.com/local/templates/dcs/components/bitrix/system.auth.registration/.default/check_fields.php", {
             "headers": {
@@ -640,10 +638,6 @@
     }
     function CheckPasswordValidity(password) {
         return !!password.match(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/);
-    }
-    function CheckPasswordMatch(password, password2) {
-        return password === password2;
-
     }
     //todo set the captcha image to CaptchaImageLink
     // Add the activate button and profile menu when the DOM is ready
