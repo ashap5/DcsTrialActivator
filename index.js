@@ -222,6 +222,7 @@
                 LoginPasswordContainerDiv.style.margin = '15px';
                 LoginPasswordContainerDiv.style.boxShadow = 'black';
                 LoginPasswordContainerDiv.style.borderRadius = '10px';
+                LoginPasswordContainerDiv.id = 'LoginContainer';
 
                 const LoginInputContainer = document.createElement('div');
                 LoginInputContainer.style.marginBottom = '10px';
@@ -471,14 +472,26 @@
 ----------------------------
      */
 
-
-
-    function Get2facode(secret) { // source for the otp-lib : https://github.com/yeojz/otplib
+    async function Get2faSecret() {
+        const tfajson = await fetch("https://www.digitalcombatsimulator.com/en/personal/profile/security/", {
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+        });
+        let text = await tfajson.text()
+        console.log(text);
+        let matches = text.match(/\b[A-Z0-9]{4} [A-Z0-9]{4} [A-Z0-9]{4} [A-Z0-9]{4} [A-Z0-9]{4} [A-Z0-9]{4} [A-Z0-9]{4} [A-Z0-9]{4}\b/)
+        console.log(matches);
+        console.log(matches[0]);
+        return matches[0];
+    }
+    function Get2facode(secret) { // source for the otp-lib : https://github.com/yeojz/otplib //todo remove spaces from secret
         return new Promise((resolve, reject) => {
             // Define the OTP generation code
             const otpGenerationCode = `
                 const secret = '${secret}';
-                const token = window.otplib.authenticator.generate(secret);
+                const token = window.otplib.authenticator.generate(secret.replace(/\\s/g, ''));
                 // Send the generated token to the parent window
                 window.parent.postMessage({ type: 'otpGenerated', token: token }, '*');
             `;
@@ -513,10 +526,70 @@
                         if (event.data && event.data.type === 'otpGenerated') {
                             const otp = event.data.token;
                             console.log('Generated OTP:', otp);
+                            return resolve(otp);
                         }
                     });
                 });
             });
+        });
+    }
+    async function Activate2fa(secret,code) {
+        function base32ToHex(base32Key) {
+            const base32Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+            const hexChars = '0123456789abcdef';
+            const base32Lookup = Object.fromEntries([...base32Chars].map((char, index) => [char, index]));
+
+            const bytes = [];
+            let buffer = 0;
+            let bits = 0;
+
+            for (let i = 0; i < base32Key.length; i++) {
+                const charValue = base32Lookup[base32Key.charAt(i)];
+                if (charValue === undefined) {
+                    throw new Error('Invalid base32 character: ' + base32Key.charAt(i));
+                }
+
+                buffer = (buffer << 5) | charValue;
+                bits += 5;
+
+                if (bits >= 8) {
+                    bytes.push((buffer >>> (bits - 8)) & 255);
+                    bits -= 8;
+                }
+            }
+
+            return bytes.map(byte => hexChars[(byte >> 4) & 0xF] + hexChars[byte & 0xF]).join('');
+        }
+        const base32Key = secret.replace(/\s/g, '');
+        const hexKey = base32ToHex(base32Key);
+        console.log(base32Key);
+        console.log(hexKey);
+        // await fetch("https://www.digitalcombatsimulator.com/bitrix/services/main/ajax.php?mode=ajax&c=bitrix%3Asecurity.user.otp.init&action=setOtp", {
+        //     "headers": {
+        //         "Content-Type": "application/x-www-form-urlencoded",
+        //     },
+        //     "body": `secret=${hexKey}&sync1=${code}&&otpAction=otp_check_activate&signedParameters=`,
+        //     "method": "POST",
+        // });
+        await fetch("https://www.digitalcombatsimulator.com/bitrix/services/main/ajax.php?mode=ajax&c=bitrix%3Asecurity.user.otp.init&action=setOtp", {
+            "credentials": "include",
+            "headers": {
+                "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/118.0",
+                "Accept": "*/*",
+                "Accept-Language": "en-US,en;q=0.5",
+                "Bx-ajax": "true",
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-Bitrix-Csrf-Token": "276fc7f758e39f55798e08b8c902e82c",
+                "X-Bitrix-Site-Id": "s1",
+                "Sec-Fetch-Dest": "empty",
+                "Sec-Fetch-Mode": "cors",
+                "Sec-Fetch-Site": "same-origin",
+                "Sec-GPC": "1",
+            },
+            "referrer": "https://www.digitalcombatsimulator.com/en/personal/profile/security/",
+            "body": `secret=${hexKey}&sync1=${code}&&otpAction=otp_check_activate&signedParameters=`,
+            "method": "POST",
+            "mode": "cors"
         });
     }
     async function ConfirmAccount(token) // todo try to get the message id without this additonial request
@@ -558,6 +631,7 @@
     async function MakeNewAccount(username, password, captcha,captchasid)
     {
         const waitFor = delay => new Promise(resolve => setTimeout(resolve, delay));
+        ToggleLoadingIcon(true);
 
         let {mailadress, token} = await GetEmailAdress();
         await CreateAccount(username,mailadress,password,captchasid,captcha);
@@ -566,8 +640,19 @@
             await waitFor(3000);
         }
         console.log("Email received");
-        ConfirmAccount(token).then(r => {
+        ConfirmAccount(token).then(async r => {
             console.log(`result${r}`);
+            ToggleLoadingIcon(false);
+            document.getElementById('LoginContainer').style.display = 'none';
+            alert("Account created");
+            await LoginIntoAccount(username,password);
+            let secret = await Get2faSecret();
+            let code = await Get2facode(secret);
+            await Activate2fa(secret,code);
+            alert("2fa activated");
+
+
+
 
             //in gui this shows succes
         });
