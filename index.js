@@ -226,6 +226,11 @@
                 LoginInputContainer.style.marginBottom = '10px';
                 LoginPasswordContainerDiv.append(LoginInputContainer);
 
+                const LoginLabelsContainer = document.createElement('div');
+                LoginLabelsContainer.style.display = 'flex';
+                LoginLabelsContainer.style.justifyContent = 'space-between';
+                LoginInputContainer.append(LoginLabelsContainer);
+
                 const LoginLabel = document.createElement('label');
                 LoginLabel.textContent = 'Login Name';
                 LoginLabel.style.margin = '1px';
@@ -243,7 +248,13 @@
                 Username.style.padding = '5px';
                 const CheckUsername = async function (e)
                 {
-                    console.log(CheckUserNameValidity(Username.value));
+                    let validUsername = await CheckUserNameValidity(Username.value)
+                    console.log(validUsername);
+                    if (validUsername) {
+                        WrongLogin.style.display = 'none';
+                    } else {
+                        WrongLogin.style.display = 'block';
+                    }
                 }
                 Username.addEventListener('change', CheckUsername);
                 LoginInputContainer.append(Username);
@@ -252,8 +263,10 @@
                 PasswordInputContainer.style.marginBottom = '10px';
                 LoginPasswordContainerDiv.append(PasswordInputContainer);
 
-
-
+                const PasswordTextContainer = document.createElement('div');
+                PasswordTextContainer.style.display = 'flex';
+                PasswordTextContainer.style.justifyContent = 'space-between';
+                PasswordInputContainer.append(PasswordTextContainer)
 
                 const PasswordLabel = document.createElement('label');
                 PasswordLabel.textContent = 'Password';
@@ -273,10 +286,27 @@
                 PasswordInput.style.padding = '5px';
                 const CheckPassword = function (e)
                 {
-                    console.log(CheckPasswordValidity(PasswordInput.value)); //tido add text that says password is too weak mozno aj text dat aky musi byt
+                    let valid = CheckPasswordValidity(PasswordInput.value); //todo add text that says password is too weak mozno aj text dat aky musi byt
+                    console.log(valid);
+                    console.log(PasswordWrong.style.display);
+                    if (valid) {
+                        PasswordWrong.style.display = 'none';
+                    } else {
+                        PasswordWrong.style.display = 'block';
+                    }
                 }
                 PasswordInput.addEventListener('input', CheckPassword);
                 PasswordInputContainer.append(PasswordInput);
+
+                const RandomPasswordButton = document.createElement('button');
+                RandomPasswordButton.textContent = 'Random Password';
+                RandomPasswordButton.style.borderStyle = 'none';
+                RandomPasswordButton.style.background = 'none';
+                RandomPasswordButton.onclick = () => {
+                    PasswordInput.value = generatePassword();
+                    PasswordWrong.style.display = 'none';
+                }
+                PasswordTextContainer.append(RandomPasswordButton);
 
                 const captchaImg = document.createElement('img');
                 captchaImg.id = 'captcha-img';
