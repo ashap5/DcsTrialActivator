@@ -8,15 +8,16 @@
 // @grant        none
 // @run-at       document-start
 // ==/UserScript==
+
 (function() {
-    'use strict';
+    "use strict";
     let countsucces = 0
     let count = 0
     const counter = document.createElement('span');
     counter.style.marginTop = '5px';
     async function ActivateTrialOnWebsite(moduleid,sessionid)
     {
-        fetch("https://www.digitalcombatsimulator.com/en/personal/licensing/trial/?params=" + moduleid + "&sessid=" + sessionid, {
+        fetch(`https://www.digitalcombatsimulator.com/en/personal/licensing/trial/?params=${moduleid}&sessid=${sessionid}`, {
             "credentials": "include",
             "headers": {
                 "Accept": "*/*",
@@ -35,7 +36,7 @@
             console.log("This function is run when the request succeeds", res);
             countsucces += 1
             count +=1
-            counter.textContent = countsucces + " succeses/ " + count + " total";
+            counter.textContent = `${countsucces} succeses/ ${count} total`;
             return 1
         })
             .catch(err => {
@@ -352,6 +353,12 @@
 
                 }
                 AccountWindowButtonContainer.append(CreateAccountButton);
+
+                const LoadingIcon = document.createElement('img');
+                LoadingIcon.style.position = 'fixed';
+                LoadingIcon.style.top = '50%';
+                LoadingIcon.style.left = '50%';
+                LoadingIcon.src = './Loading.svg';
             }
             // Function to update the websites list when the profile is changed
             function updateWebsitesList() {
@@ -518,16 +525,16 @@
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization" : 'Bearer ' + token,
+                "Authorization" : `Bearer ${token}`,
             },
         });
         let messageid = (await GetEmails.json())['hydra:member'][0]['id'];
         console.log(messageid);
-        const GetEmail = await fetch("https://api.mail.tm/messages/" + messageid, {
+        const GetEmail = await fetch(`https://api.mail.tm/messages/${messageid}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization" : 'Bearer ' + token,
+                "Authorization" : `Bearer ${token}`,
             },
         });
         let json = await GetEmail.json();
@@ -560,7 +567,7 @@
         }
         console.log("Email received");
         ConfirmAccount(token).then(r => {
-            console.log("result" + r);
+            console.log(`result${r}`);
 
             //in gui this shows succes
         });
@@ -581,7 +588,7 @@
             const CreateAccount = await fetch("https://api.mail.tm/accounts", {
                 method: "POST",
                 body: JSON.stringify({
-                    "address": mailadress + "@" + domain,
+                    "address": `${mailadress}@${domain}`,
                     "password": "test",
                 }),
                 headers: {"Content-Type": "application/json"},
@@ -591,7 +598,7 @@
             const GetToken = await fetch("https://api.mail.tm/token", {
                 method: "POST",
                 body: JSON.stringify({
-                    "address": mailadress + "@" + domain,
+                    "address": `${mailadress}@${domain}`,
                     "password": "test",
                 }),
                 headers: {"Content-Type": "application/json"},
@@ -599,7 +606,7 @@
 
 
             let token = (await GetToken.json())['token'];
-            return {mailadress : mailadress + "@" + domain, token : token};
+            return {mailadress : `${mailadress}@${domain}`, token : token};
         }
 
         async function CreateAccount(username,emailadress,password,captchasid,captchaword){
@@ -633,7 +640,7 @@
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization" : 'Bearer ' + token,
+                    "Authorization" : `Bearer ${token}`,
                 },
             });
             let emailjson = await GetEmails.json();
@@ -664,7 +671,7 @@
 
         let captchaid = capthaWithSid[0].replace("?captcha_sid=", "");
 
-        const captchaImageLink = "https://www.digitalcombatsimulator.com/bitrix/tools/captcha.php?captcha_sid=" + captchaid;
+        const captchaImageLink = `https://www.digitalcombatsimulator.com/bitrix/tools/captcha.php?captcha_sid=${captchaid}`;
         return {captchaid : captchaid, captchaImageLink : captchaImageLink};
 
     }
