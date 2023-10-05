@@ -18,7 +18,8 @@ async function CheckUserNameValidity(username) {
         "method": "POST",
     });
     const json = await res.json();
-    console.log(json);
+    return json.status === "OK";
+
 }
 function CheckPasswordValidity(password) {
     return !!password.match(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/);
@@ -27,3 +28,5 @@ function CheckPasswordMatch(password, password2) {
     return password === password2;
 
 }
+let valid = await CheckUserNameValidity("pasha5");
+console.log(valid);

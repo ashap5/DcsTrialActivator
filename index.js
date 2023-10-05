@@ -226,16 +226,22 @@
                 LoginInputContainer.style.marginBottom = '10px';
                 LoginPasswordContainerDiv.append(LoginInputContainer);
 
-                const LoginText = document.createElement('label');
-                LoginText.textContent = 'Login Name';
-                LoginText.style.margin = '1px';
-                LoginInputContainer.append(LoginText);
+                const LoginLabel = document.createElement('label');
+                LoginLabel.textContent = 'Login Name';
+                LoginLabel.style.margin = '1px';
+                LoginLabelsContainer.append(LoginLabel);
+
+                const WrongLogin = document.createElement('label');
+                WrongLogin.textContent = 'username taken';
+                WrongLogin.style.color = 'red';
+                WrongLogin.style.display = 'none';
+                LoginLabelsContainer.append(WrongLogin);
 
                 const Username = document.createElement('input');
                 Username.type = 'text';
                 Username.style.width = '100%';
                 Username.style.padding = '5px';
-                const CheckUsername = function (e)
+                const CheckUsername = async function (e)
                 {
                     console.log(CheckUserNameValidity(Username.value));
                 }
@@ -249,10 +255,16 @@
 
 
 
-                const PasswordText = document.createElement('label');
-                PasswordText.textContent = 'Password';
-                PasswordText.style.margin = '0px';
-                PasswordInputContainer.append(PasswordText);
+                const PasswordLabel = document.createElement('label');
+                PasswordLabel.textContent = 'Password';
+                PasswordLabel.style.margin = '0px';
+                PasswordTextContainer.append(PasswordLabel);
+
+                const PasswordWrong = document.createElement('label');
+                PasswordWrong.textContent = 'incorrect password format';
+                PasswordWrong.style.color = 'red';
+                PasswordWrong.style.display = 'none';
+                PasswordTextContainer.append(PasswordWrong);
 
                 // todo Make a hide/display text button (switch type between password and text)
                 const PasswordInput = document.createElement('input');
@@ -276,14 +288,15 @@
                 const captchaText = document.createElement('input');
                 captchaText.type = 'text';
                 LoginPasswordContainerDiv.append(captchaText);
-                
+
                 const AccountWindowButtonContainer = document.createElement('div');
+                AccountWindowButtonContainer.style.display = 'flex';
                 AccountWindowButtonContainer.style.display = 'flex';
                 AccountWindowButtonContainer.style.justifyContent = 'space-between';
                 AccountWindowButtonContainer.style.margin = '5px';
                 AccountWindowButtonContainer.style.marginRight = '10px';
                 LoginPasswordContainerDiv.append(AccountWindowButtonContainer)
-                
+
                 const cancelButton = document.createElement('button');
                 cancelButton.textContent = 'Cancel';
                 cancelButton.style.scale = '1.2';
@@ -634,10 +647,33 @@
             "method": "POST",
         });
         const json = await res.json();
-        console.log(json);
+        return json.status === "OK";
+
     }
     function CheckPasswordValidity(password) {
         return !!password.match(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/);
+    }
+    function generatePassword() {
+        const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
+        const digitChars = '0123456789';
+
+        const allChars = uppercaseChars + lowercaseChars + digitChars;
+
+        // Generate a random password with at least 8 characters
+        let password = '';
+        for (let i = 0; i < 8; i++) {
+            const randomIndex = Math.floor(Math.random() * allChars.length);
+            password += allChars[randomIndex];
+        }
+
+        // Ensure that the generated password meets the regex requirements
+        const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/;
+        if (regex.test(password)) {
+            return password;
+        } else {
+            return generatePassword();
+        }
     }
     //todo set the captcha image to CaptchaImageLink
     // Add the activate button and profile menu when the DOM is ready
