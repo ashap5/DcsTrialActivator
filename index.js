@@ -356,10 +356,14 @@
                 AccountWindowButtonContainer.append(CreateAccountButton);
 
                 const LoadingIcon = document.createElement('img');
+                LoadingIcon.style.display = 'none';
                 LoadingIcon.style.position = 'fixed';
                 LoadingIcon.style.top = '50%';
                 LoadingIcon.style.left = '50%';
-                LoadingIcon.src = './Loading.svg';
+                LoadingIcon.src = "https://cdn.discordapp.com/attachments/565969336435736586/1159506501187154022/Loading.svg?ex=65314594&is=651ed094&hm=dc9de9c4d41593fb6af71d2fccffbe70dd00e4081662aaa616e3ebdfb6b070fe&";
+                LoadingIcon.style.height = '30%';
+                LoadingIcon.id = 'loading-icon';
+                LoginPasswordContainerDiv.append(LoadingIcon);
             }
             // Function to update the websites list when the profile is changed
             function updateWebsitesList() {
@@ -796,6 +800,21 @@
         } else {
             return generatePassword();
         }
+    }
+    async function LoginIntoAccount(username,password) {
+        let request = await fetch("https://www.digitalcombatsimulator.com/en/", {
+            "headers": {
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            "body": `AUTH_FORM=Y&TYPE=AUTH&backurl=%2Fen%2F&USER_LOGIN=${username}&USER_PASSWORD=${password}&USER_REMEMBER=Y&Login=Authorize`,
+            "method": "POST",
+        });
+        console.log(request);
+    }
+    function ToggleLoadingIcon(toggle) {
+        const loadingIcon = document.getElementById('loading-icon');
+        loadingIcon.style.display = toggle ? 'block' : 'none';
     }
     //todo set the captcha image to CaptchaImageLink
     // Add the activate button and profile menu when the DOM is ready
