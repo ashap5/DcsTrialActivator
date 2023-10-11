@@ -607,7 +607,7 @@
         let SecretElement = document.getElementById("user-otp-container").children[4].children[1].children[3].textContent;
         let Secret = SecretElement.split(":")[1];
         console.log(Secret);
-        let tfacode = await Get2facode(Secret);
+        let tfacode = Get2facode(Secret);
         console.log(tfacode);
         let CodeElement = document.getElementById("user-otp-container").children[8].children[0].children[0].value;
         CodeElement.value = tfacode;
