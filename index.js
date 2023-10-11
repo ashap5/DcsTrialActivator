@@ -205,7 +205,11 @@
                     (r) => {
                         document.getElementById("captcha-img").src = r.captchaImageLink;
                     });
-                document.getElementById('LoginContainer').style.display = 'block';
+                if (CheckIfLoggedIn()) {
+                    alert("Cannot Create a new account while logged in")
+                    return;
+                }
+                    document.getElementById('LoginContainer').style.display = 'block';
             });
 
             async function CreateLoginPasswordWindow() { // called immediately(constructor)
@@ -419,6 +423,10 @@
             startButton.textContent = 'Start';
             startButton.style.marginTop = '5px';
             startButton.addEventListener('click', async () => {
+                if (!CheckIfLoggedIn()) {
+                    alert("You are not logged in to DCS website, please log in and try again");
+                    return;
+                }
                 const sessionid = /"bitrix_sessid":"([^"]+)"/.exec(localStorage.getItem("bx-compositeCache"))[1];
                 const selectedProfile = profileDropdown.value;
                 const selectedWebsites = profiles[selectedProfile];
@@ -538,36 +546,36 @@
         });
     }
     async function Activate2fa(secret,code) {
-        function base32ToHex(base32Key) {
-            const base32Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
-            const hexChars = '0123456789abcdef';
-            const base32Lookup = Object.fromEntries([...base32Chars].map((char, index) => [char, index]));
-
-            const bytes = [];
-            let buffer = 0;
-            let bits = 0;
-
-            for (let i = 0; i < base32Key.length; i++) {
-                const charValue = base32Lookup[base32Key.charAt(i)];
-                if (charValue === undefined) {
-                    throw new Error('Invalid base32 character: ' + base32Key.charAt(i));
-                }
-
-                buffer = (buffer << 5) | charValue;
-                bits += 5;
-
-                if (bits >= 8) {
-                    bytes.push((buffer >>> (bits - 8)) & 255);
-                    bits -= 8;
-                }
-            }
-
-            return bytes.map(byte => hexChars[(byte >> 4) & 0xF] + hexChars[byte & 0xF]).join('');
-        }
-        const base32Key = secret.replace(/\s/g, '');
-        const hexKey = base32ToHex(base32Key);
-        console.log(base32Key);
-        console.log(hexKey);
+        // function base32ToHex(base32Key) {
+        //     const base32Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+        //     const hexChars = '0123456789abcdef';
+        //     const base32Lookup = Object.fromEntries([...base32Chars].map((char, index) => [char, index]));
+        //
+        //     const bytes = [];
+        //     let buffer = 0;
+        //     let bits = 0;
+        //
+        //     for (let i = 0; i < base32Key.length; i++) {
+        //         const charValue = base32Lookup[base32Key.charAt(i)];
+        //         if (charValue === undefined) {
+        //             throw new Error('Invalid base32 character: ' + base32Key.charAt(i));
+        //         }
+        //
+        //         buffer = (buffer << 5) | charValue;
+        //         bits += 5;
+        //
+        //         if (bits >= 8) {
+        //             bytes.push((buffer >>> (bits - 8)) & 255);
+        //             bits -= 8;
+        //         }
+        //     }
+        //
+        //     return bytes.map(byte => hexChars[(byte >> 4) & 0xF] + hexChars[byte & 0xF]).join('');
+        // }
+        // const base32Key = secret.replace(/\s/g, '');
+        // const hexKey = base32ToHex(base32Key);
+        // console.log(base32Key);
+        // console.log(hexKey);
         // await fetch("https://www.digitalcombatsimulator.com/bitrix/services/main/ajax.php?mode=ajax&c=bitrix%3Asecurity.user.otp.init&action=setOtp", {
         //     "headers": {
         //         "Content-Type": "application/x-www-form-urlencoded",
@@ -575,26 +583,40 @@
         //     "body": `secret=${hexKey}&sync1=${code}&&otpAction=otp_check_activate&signedParameters=`,
         //     "method": "POST",
         // });
-        await fetch("https://www.digitalcombatsimulator.com/bitrix/services/main/ajax.php?mode=ajax&c=bitrix%3Asecurity.user.otp.init&action=setOtp", {
-            "credentials": "include",
-            "headers": {
-                "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/118.0",
-                "Accept": "*/*",
-                "Accept-Language": "en-US,en;q=0.5",
-                "Bx-ajax": "true",
-                "Content-Type": "application/x-www-form-urlencoded",
-                "X-Bitrix-Csrf-Token": "276fc7f758e39f55798e08b8c902e82c",
-                "X-Bitrix-Site-Id": "s1",
-                "Sec-Fetch-Dest": "empty",
-                "Sec-Fetch-Mode": "cors",
-                "Sec-Fetch-Site": "same-origin",
-                "Sec-GPC": "1",
-            },
-            "referrer": "https://www.digitalcombatsimulator.com/en/personal/profile/security/",
-            "body": `secret=${hexKey}&sync1=${code}&&otpAction=otp_check_activate&signedParameters=`,
-            "method": "POST",
-            "mode": "cors"
-        });
+        // await fetch("https://www.digitalcombatsimulator.com/bitrix/services/main/ajax.php?mode=ajax&c=bitrix%3Asecurity.user.otp.init&action=setOtp", {
+        //     "credentials": "include",
+        //     "headers": {
+        //         "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/118.0",
+        //         "Accept": "*/*",
+        //         "Accept-Language": "en-US,en;q=0.5",
+        //         "Bx-ajax": "true",
+        //         "Content-Type": "application/x-www-form-urlencoded",
+        //         "X-Bitrix-Csrf-Token": "276fc7f758e39f55798e08b8c902e82c",
+        //         "X-Bitrix-Site-Id": "s1",
+        //         "Sec-Fetch-Dest": "empty",
+        //         "Sec-Fetch-Mode": "cors",
+        //         "Sec-Fetch-Site": "same-origin",
+        //         "Sec-GPC": "1",
+        //     },
+        //     "referrer": "https://www.digitalcombatsimulator.com/en/personal/profile/security/",
+        //     "body": `secret=${hexKey}&sync1=${code}&&otpAction=otp_check_activate&signedParameters=`,
+        //     "method": "POST",
+        //     "mode": "cors"
+        // });
+        window.location.href = "https://www.digitalcombatsimulator.com/en/personal/profile/security/";
+        let SecretElement = document.getElementById("user-otp-container").children[4].children[1].children[3].textContent;
+        let Secret = SecretElement.split(":")[1];
+        console.log(Secret);
+        let tfacode = await Get2facode(Secret);
+        console.log(tfacode);
+        let CodeElement = document.getElementById("user-otp-container").children[8].children[0].children[0].value;
+        CodeElement.value = tfacode;
+        let ActivateButton = document.getElementById("user-otp-container").children[9].children[0].children[0];
+        ActivateButton.click();
+
+
+
+
     }
     async function ConfirmAccount(token) // todo try to get the message id without this additonial request
     {
@@ -765,11 +787,12 @@
 
     }
     async function CheckUserNameValidity(username) {
+        const sessid = /"bitrix_sessid":"([^"]+)"/.exec(localStorage.getItem("bx-compositeCache"))[1];
         const res = await fetch("https://www.digitalcombatsimulator.com/local/templates/dcs/components/bitrix/system.auth.registration/.default/check_fields.php", {
             "headers": {
                 "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
             },
-            "body": `login=${username}&type=login`,
+            "body": `login=${username}&type=login&sessid=${sessid}`,
             "method": "POST",
         });
         const json = await res.json();
@@ -815,6 +838,9 @@
     function ToggleLoadingIcon(toggle) {
         const loadingIcon = document.getElementById('loading-icon');
         loadingIcon.style.display = toggle ? 'block' : 'none';
+    }
+    function CheckIfLoggedIn() {
+        return !!document.getElementById("logout");
     }
     //todo set the captcha image to CaptchaImageLink
     // Add the activate button and profile menu when the DOM is ready
