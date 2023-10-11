@@ -545,7 +545,7 @@
             });
         });
     }
-    async function Activate2fa(secret,code) {
+    async function Activate2fa() {
         // function base32ToHex(base32Key) {
         //     const base32Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
         //     const hexChars = '0123456789abcdef';
@@ -616,7 +616,6 @@
 
 
 
-
     }
     async function ConfirmAccount(token) // todo try to get the message id without this additonial request
     {
@@ -672,9 +671,7 @@
             document.getElementById('LoginContainer').style.display = 'none';
             alert("Account created");
             await LoginIntoAccount(username,password);
-            let secret = await Get2faSecret();
-            let code = await Get2facode(secret);
-            await Activate2fa(secret,code);
+            await Activate2fa();
             alert("2fa activated");
 
 
