@@ -204,8 +204,8 @@
                 if(LoggedIn())
                 {
                     alert("You are already logged in log out first")
-
                     return;
+
                 }
 
                 await GetCaptha().then(
@@ -848,7 +848,7 @@
         loadingIcon.style.display = toggle ? 'block' : 'none';
     }
     function LoggedIn() {
-        return !document.getElementById("logout");
+        return !!document.getElementById("login-line").children[0].text.match(/Logout/);
     }
     //todo set the captcha image to CaptchaImageLink
     // Add the activate button and profile menu when the DOM is ready
