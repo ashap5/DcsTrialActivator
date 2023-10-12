@@ -34,4 +34,23 @@ Note: Profiles are saved locally in your browser's local storage, so they will b
 if you find any bugs/missing modules contact me via Discord : pasha5 or open an issue
 
 
-# //TODO implement creating new profiles via GUI
+DISCLAIMER
+
+Important Notice
+
+This software is provided for educational and informational purposes only. By using this software, you understand and agree to the following:
+
+    Respect Terms of Service: You must respect and comply with the Terms of Service (TOS) of any website or service you interact with using this software. Violating TOS may result in legal consequences, including but not limited to account suspension, legal action, or other penalties imposed by the website owner.
+
+    No Warranty: This software is provided "as is," without any warranty of any kind. The author makes no representations or warranties, express or implied, regarding the use or the results of this software in terms of accuracy, reliability, or otherwise.
+
+    Use at Your Own Risk: Your use of this software is at your own risk. The author shall not be liable for any claims, damages, or other liabilities arising from the use of this software.
+
+    Legal Responsibility: It is your responsibility to use this software in accordance with all applicable laws and regulations, and to understand the legal consequences of your actions. The author of this software is not responsible for any legal issues that may arise from your use of the software.
+
+    Educational Use: This software is intended for educational purposes to help users understand the principles of web interaction and data retrieval. It should not be used for any malicious, unethical, or illegal activities.
+
+    Open Source License: This software is released under the MIT License. You are free to use, modify, and distribute it, but you must include the original license and copyright notice in all copies.
+
+By using this software, you acknowledge that you have read, understood, and agreed to these terms. If you do not agree with these terms, you should not use this software.
+
