@@ -201,15 +201,18 @@
 
             MakeNewAccountButton.addEventListener('click', async () => {
                 console.log("opened new account menu")
+                if(LoggedIn())
+                {
+                    alert("You are already logged in log out first")
+
+                    return;
+                }
+
                 await GetCaptha().then(
                     (r) => {
                         document.getElementById("captcha-img").src = r.captchaImageLink;
                     });
-                if (CheckIfLoggedIn()) {
-                    alert("Cannot Create a new account while logged in")
-                    return;
-                }
-                    document.getElementById('LoginContainer').style.display = 'block';
+                document.getElementById('LoginContainer').style.display = 'block';
             });
 
             async function CreateLoginPasswordWindow() { // called immediately(constructor)
@@ -423,7 +426,7 @@
             startButton.textContent = 'Start';
             startButton.style.marginTop = '5px';
             startButton.addEventListener('click', async () => {
-                if (!CheckIfLoggedIn()) {
+                if (!LoggedIn()) {
                     alert("You are not logged in to DCS website, please log in and try again");
                     return;
                 }
@@ -844,8 +847,8 @@
         const loadingIcon = document.getElementById('loading-icon');
         loadingIcon.style.display = toggle ? 'block' : 'none';
     }
-    function CheckIfLoggedIn() {
-        return !!document.getElementById("logout");
+    function LoggedIn() {
+        return !document.getElementById("logout");
     }
     //todo set the captcha image to CaptchaImageLink
     // Add the activate button and profile menu when the DOM is ready
