@@ -603,16 +603,8 @@
         //     "method": "POST",
         //     "mode": "cors"
         // });
+        sessionStorage.setItem("2fa", "true");
         window.location.href = "https://www.digitalcombatsimulator.com/en/personal/profile/security/";
-        let SecretElement = document.getElementById("user-otp-container").children[4].children[1].children[3].textContent;
-        let Secret = SecretElement.split(":")[1];
-        console.log(Secret);
-        let tfacode = Get2facode(Secret);
-        console.log(tfacode);
-        let CodeElement = document.getElementById("user-otp-container").children[8].children[0].children[0].value;
-        CodeElement.value = tfacode;
-        let ActivateButton = document.getElementById("user-otp-container").children[9].children[0].children[0];
-        ActivateButton.click();
 
 
 
@@ -659,7 +651,14 @@
         ToggleLoadingIcon(true);
 
         let {mailadress, token} = await GetEmailAdress();
-        await CreateAccount(username,mailadress,password,captchasid,captcha);
+        let succes = await CreateAccount(username,mailadress,password,captchasid,captcha);
+        console.log(succes);
+        if (!succes) {
+            ToggleLoadingIcon(false);
+            return;
+        }
+
+
         while (await CheckEmailCount() < 1) {
             console.log("Waiting for email");
             await waitFor(3000);
@@ -737,8 +736,17 @@
                 "method": "POST",
                 "mode": "cors"
             });
-            let response = await request
+            let response = await request;
+            //find "Word for protecting against automatic registration is entered incorrectly" inside the response
+            let responsetext = await response.text();
+            if(responsetext.match(/Word for protecting against automatic registration is entered incorrectly/))
+            {
+                alert("Wrong captcha");
+                return false;
+            }
             console.log(response);
+            return true;
+
         }
 
 
@@ -843,6 +851,25 @@
     // Add the activate button and profile menu when the DOM is ready
     document.addEventListener('DOMContentLoaded', () => {
         createActivateButton();
+        console.log("reached dom load")
+        let waitingfor2fa = sessionStorage.getItem("2fa");
+
+        if (waitingfor2fa)
+        {
+            let SecretElement = document.getElementById("user-otp-container").children[4].children[1].children[3].textContent;
+            let Secret = SecretElement.split(":")[1];
+            console.log(Secret);
+            Get2facode(Secret)
+                .then((otp) => {
+                    console.log(otp);
+                    let CodeElement = document.getElementById("user-otp-container").children[8].children[0].children[0];
+                    CodeElement.value = otp;
+                    let ActivateButton = document.getElementById("user-otp-container").children[9].children[0].children[0];
+                    ActivateButton.click();
+                    sessionStorage.removeItem("2fa");
+                })
+
+        }
 
     });
 
