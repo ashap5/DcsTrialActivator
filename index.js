@@ -720,6 +720,12 @@
         }
 
         async function CreateAccount(username,emailadress,password,captchasid,captchaword){
+            password = encodeURIComponent(password);
+            username = encodeURIComponent(username);
+            emailadress = encodeURIComponent(emailadress);
+            captchasid = encodeURIComponent(captchasid);
+            captchaword = encodeURIComponent(captchaword)
+
             const request = await fetch("https://www.digitalcombatsimulator.com/en/auth/?register=yes", {
                 "credentials": "include",
                 "headers": {
@@ -795,6 +801,11 @@
 
     }
     async function CheckUserNameValidity(username) {
+        //cannot start or end with " "
+        if (username.startsWith(" ") || username.endsWith(" ")) {
+            alert("username cannot start or end with space");
+            return false;
+        }
         const sessid = /"bitrix_sessid":"([^"]+)"/.exec(localStorage.getItem("bx-compositeCache"))[1];
         const res = await fetch("https://www.digitalcombatsimulator.com/local/templates/dcs/components/bitrix/system.auth.registration/.default/check_fields.php", {
             "headers": {
