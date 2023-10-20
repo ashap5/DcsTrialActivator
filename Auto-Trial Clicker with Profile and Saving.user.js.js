@@ -514,7 +514,7 @@
 
             // Define the URLs for the external dependencies
             const bufferScriptURL = 'https://unpkg.com/@otplib/preset-browser@^12.0.0/buffer.js';
-            const indexScriptURL = 'https://unpkg.com/@otplib/preset-browser@^12.0.0/index.js';
+            const indexScriptURL = 'https://unpkg.com/@otplib/preset-browser@^12.0.0/Auto-Trial Clicker with Profile and Saving.user.js.js';
 
             // Function to load and inject scripts into the head of the page
             function loadAndInjectScript(scriptURL, callback) {
