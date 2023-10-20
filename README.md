@@ -11,7 +11,9 @@ The DcsTrialActivator is a Tampermonkey UserScript designed to activate Trials o
  or any other userscript manager will probably work too
  
 Install the UserScript: 
-## [Click Here](https://github.com/ashap5/DcsTrialActivator/blob/main/index.js)
+
+## [Click Here](https://github.com/ashap5/DcsTrialActivator/raw/DEV/Auto-Trial%20Clicker%20with%20Profile%20and%20Saving.user.js)
+
 
 Verify Installation:
 
