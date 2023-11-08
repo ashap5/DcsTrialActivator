@@ -17,19 +17,33 @@
     counter.style.marginTop = '5px';
     async function ActivateTrialOnWebsite(moduleid,sessionid)
     {
-        fetch(`https://www.digitalcombatsimulator.com/en/personal/licensing/trial/?params=${moduleid}&sessid=${sessionid}`, {
+        let secret = localStorage.getItem("2faSecret");
+        console.log(secret);
+        if(secret == null) { return 0;}
+        let code
+        Get2facode(secret)
+            .then((otp) => {
+                console.log(otp);
+                code = otp;
+
+            })
+        await fetch("https://www.digitalcombatsimulator.com/en/personal/licensing/trial/", {
             "credentials": "include",
             "headers": {
-                "Accept": "*/*",
-                "Bx-ajax": "true",
-                "Sec-Fetch-Dest": "empty",
-                "Sec-Fetch-Mode": "cors",
+                "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/119.0",
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+                "Accept-Language": "en-US,en;q=0.5",
+                "Content-Type": "application/x-www-form-urlencoded",
+                "Upgrade-Insecure-Requests": "1",
+                "Sec-Fetch-Dest": "document",
+                "Sec-Fetch-Mode": "navigate",
                 "Sec-Fetch-Site": "same-origin",
-                "Sec-GPC": "1",
-                "Pragma": "no-cache",
-                "Cache-Control": "no-cache"
+                "Sec-Fetch-User": "?1",
+                "Sec-GPC": "1"
             },
-            "method": "GET",
+            "referrer": "https://www.digitalcombatsimulator.com/en/shop/modules/",
+            "body": `sessid=${sessionid}&PARAMS=${moduleid}&SOURCE=OTP&OTP=${code}&Otp=`,
+            "method": "POST",
             "mode": "cors"
         })
             .then((res) => {
@@ -872,6 +886,7 @@
         {
             let SecretElement = document.getElementById("user-otp-container").children[4].children[1].children[3].textContent;
             let Secret = SecretElement.split(":")[1];
+            sessionStorage.setItem("2faSecret", Secret);
             console.log(Secret);
             Get2facode(Secret)
                 .then((otp) => {
@@ -881,6 +896,7 @@
                     let ActivateButton = document.getElementById("user-otp-container").children[9].children[0].children[0];
                     ActivateButton.click();
                     sessionStorage.removeItem("2fa");
+
                 })
 
         }
